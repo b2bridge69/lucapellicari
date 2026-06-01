@@ -3,8 +3,9 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { BookOpen, ArrowDown, Sparkles, Mic } from 'lucide-react'
+import Image from 'next/image'
+import { useEffect } from 'react'
 import { useAliceContext } from './AliceProvider'
-import { AliceOrbVisualizer } from './AliceOrbVisualizer'
 import { playSound } from './AliceSounds'
 
 const fadeUp = {
@@ -19,6 +20,13 @@ export function AliceHomepageSection() {
   const { openAlice } = useAliceContext()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
+
+  // Trigger globale: qualsiasi componente può aprire Alice con CustomEvent('alice:open')
+  useEffect(() => {
+    const handler = () => { playSound('open'); openAlice() }
+    window.addEventListener('alice:open', handler)
+    return () => window.removeEventListener('alice:open', handler)
+  }, [openAlice])
 
   const scrollToNext = () => {
     const section = document.getElementById('alice-section')
@@ -69,7 +77,7 @@ export function AliceHomepageSection() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-[0.2em] mb-6"
             style={{ background: 'rgba(107,155,174,0.12)', border: '1px solid rgba(107,155,174,0.2)', color: '#8FB8C7' }}>
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#8FB8C7' }} />
-            Scegli
+            Da dove iniziamo?
           </motion.span>
           <motion.h2 variants={fadeUp}
             className="font-display text-title mb-5 leading-tight"
@@ -77,9 +85,9 @@ export function AliceHomepageSection() {
             Come vuoi conoscermi?
           </motion.h2>
           <motion.p variants={fadeUp}
-            className="font-serif italic text-xl max-w-md mx-auto"
-            style={{ color: 'rgba(250,247,242,0.38)' }}>
-            Hai due strade davanti a te.
+            className="font-serif italic text-xl max-w-xl mx-auto"
+            style={{ color: 'rgba(250,247,242,0.55)' }}>
+            Due modi diversi per fare la stessa cosa: <strong className="not-italic font-bold text-teal-light">incontrarci</strong>.
           </motion.p>
         </motion.div>
 
@@ -104,7 +112,13 @@ export function AliceHomepageSection() {
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"
                 style={{ background: 'linear-gradient(135deg,rgba(107,155,174,0.04),transparent)' }} />
 
-              <div className="relative w-20 h-20 rounded-2xl flex items-center justify-center mb-8"
+              {/* Etichetta LEGGI */}
+              <span className="relative font-sans text-[11px] font-bold uppercase tracking-[0.3em] mb-3"
+                style={{ color: '#C4956A' }}>
+                Leggi
+              </span>
+
+              <div className="relative w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
                 style={{ background: 'linear-gradient(135deg,rgba(107,155,174,0.15),rgba(107,155,174,0.06))', border: '1px solid rgba(107,155,174,0.14)' }}>
                 <BookOpen className="text-teal" size={36} strokeWidth={1.5} />
               </div>
@@ -113,22 +127,18 @@ export function AliceHomepageSection() {
                 Esplora il sito
               </h3>
 
-              <p className="font-serif text-navy/60 text-[17px] leading-relaxed mb-10 max-w-sm">
-                Scorri, leggi, scopri. Ogni pagina racconta un frammento della mia storia, della mia visione, del mio metodo.
+              <p className="font-serif text-navy/65 text-[17px] leading-relaxed mb-10 max-w-sm">
+                Scorri, leggi, costruisci la tua idea senza fretta. Ogni pagina è un capitolo: la storia, il metodo, la visione. Per chi ama leggere e capire tutto con calma.
               </p>
 
               <button onClick={scrollToNext}
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-sans text-[15px] font-semibold transition-all duration-200 group/btn"
                 style={{ border: '2px solid rgba(44,67,86,0.12)', color: 'rgba(44,67,86,0.7)' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(44,67,86,0.28)'; (e.currentTarget as HTMLElement).style.color = '#2C4356' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(44,67,86,0.12)'; (e.currentTarget as HTMLElement).style.color = 'rgba(44,67,86,0.7)' }}>
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(44,67,86,0.12)'; (e.currentTarget as HTMLElement).style.color = 'rgba(44,67,94,0.7)' }}>
                 <span>Continua a leggere</span>
                 <ArrowDown size={18} className="transition-transform group-hover/btn:translate-y-0.5" strokeWidth={2} />
               </button>
-
-              <p className="mt-10 font-serif italic text-[13px]" style={{ color: 'rgba(44,67,86,0.22)' }}>
-                La pillola blu. Il sentiero sicuro.
-              </p>
             </div>
           </motion.div>
 
@@ -160,12 +170,21 @@ export function AliceHomepageSection() {
                 <Mic size={130} strokeWidth={0.6} style={{ color: '#FAF7F2' }} />
               </div>
 
-              {/* Orb */}
-              <div className="relative mb-6">
-                <AliceOrbVisualizer size={100} audioLevel={0} status="idle" isSpeaking={false} />
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <Mic size={32} strokeWidth={1.5} style={{ color: 'rgba(255,255,255,0.6)' }} />
-                </div>
+              {/* Etichetta COMUNICA */}
+              <span className="relative font-sans text-[11px] font-bold uppercase tracking-[0.3em] mb-4"
+                style={{ color: '#C4956A' }}>
+                Comunica
+              </span>
+
+              {/* Foto Alice */}
+              <div className="relative mb-6 w-[110px] h-[110px] rounded-full overflow-hidden ring-2 ring-teal-light/30 shadow-2xl">
+                <Image
+                  src="/images/alice/alice.png"
+                  alt="Alice — assistente AI di Luca Pellicari"
+                  fill
+                  className="object-cover"
+                  sizes="110px"
+                />
               </div>
 
               <h3 className="relative font-display text-[28px] md:text-[32px] mb-4 leading-tight"
@@ -173,18 +192,18 @@ export function AliceHomepageSection() {
                 Parla con Alice
               </h3>
 
-              {/* Badge */}
+              {/* Badge AI virtuale */}
               <span className="relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5"
                 style={{ background: 'rgba(107,155,174,0.12)', border: '1px solid rgba(107,155,174,0.18)' }}>
                 <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#6B9BAE' }} />
                 <span className="text-[12px] font-bold uppercase tracking-[0.15em] font-sans" style={{ color: '#8FB8C7' }}>
-                  Assistente AI
+                  AI Virtuale
                 </span>
               </span>
 
               <p className="relative font-serif text-[17px] leading-relaxed mb-10 max-w-sm"
-                style={{ color: 'rgba(250,247,242,0.72)' }}>
-                La mia assistente AI. Chiedile qualsiasi cosa su di me, i miei percorsi, la mia visione. Ti risponderà a voce.
+                style={{ color: 'rgba(250,247,242,0.78)' }}>
+                La mia assistente personale virtuale. Conosce ogni dettaglio del mio mondo. Chiedile quello che vuoi — ti risponderà con la sua splendida voce, come farei io. Per chi preferisce andare dritto al punto.
               </p>
 
               <motion.button
@@ -197,12 +216,8 @@ export function AliceHomepageSection() {
                 whileHover={{ scale: 1.03, boxShadow: '0 14px 44px rgba(107,155,174,0.55)' }}
                 whileTap={{ scale: 0.97 }}>
                 <Sparkles size={20} strokeWidth={2} />
-                <span>Inizia la conversazione</span>
+                <span>Ciao, dimmi pure</span>
               </motion.button>
-
-              <p className="relative mt-10 font-serif italic text-[13px]" style={{ color: 'rgba(250,247,242,0.22)' }}>
-                La pillola rossa. Il coniglio bianco.
-              </p>
             </div>
           </motion.div>
         </motion.div>

@@ -12,6 +12,7 @@ const NAV_GROUPS = {
   primary: [
     { href: '/', label: 'Home' },
     { href: '/chi-sono', label: 'Chi Sono' },
+    { href: '/il-team', label: 'Il Team' },
   ],
   percorso: {
     label: 'Percorso',
@@ -30,7 +31,8 @@ const NAV_GROUPS = {
     links: [
       { href: '/metodo-in-flow', label: 'Metodo In-Flow', desc: 'Il metodo di trasformazione' },
       { href: '/quantum-academy', label: 'Quantum Academy', desc: 'Scuola di identità e consapevolezza' },
-      { href: '/alphakom', label: 'Alphakom', desc: 'Leadership e comunicazione' },
+      { href: '/alphakom', label: 'AlphaKom', desc: 'Leadership e comunicazione' },
+      { href: '/piramide', label: 'La Piramide', desc: 'Framework identitario: 3V · 3R · 3A · 3C' },
       { href: '/metaquantistica', label: 'Metaquantistica', desc: 'La coscienza applicata alla vita' },
       { href: '/analisi-comportamento', label: 'Analisi del Comportamento', desc: 'Psicologia e neuroscienze' },
       { href: '/negoziazione', label: 'NegoziAzione', desc: 'Negoziare con identità' },

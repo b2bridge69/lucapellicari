@@ -5,77 +5,53 @@ import {
   Heart,
   Shield,
   Sparkles,
-  Eye,
-  Handshake,
-  Lightbulb,
   Flame,
   Target,
   Scale,
-  Smile,
   Star,
-  Users,
+  Gem,
 } from 'lucide-react'
 
 const values = [
   {
+    icon: Heart,
+    title: 'AMORE',
+    description: "Ama te stesso. È il primo gesto d'amore verso chi ti ama.",
+  },
+  {
     icon: Shield,
-    title: 'Rispetto',
-    description: 'Per me il rispetto è sacro. È il modo in cui entri in una stanza, il tono con cui parli, la cura con cui guardi gli altri. È il fondamento di ogni relazione autentica.'
+    title: 'RISPETTO',
+    description: 'Per ciò che sei, non per ciò che hai. Devi guadagnartelo.',
   },
   {
     icon: Sparkles,
-    title: 'Educazione',
-    description: "L'eleganza vera non sta nei vestiti, ma nel modo in cui fai sentire l'altra persona. Io credo nell'educazione come forma di bellezza interiore."
-  },
-  {
-    icon: Star,
-    title: 'Eleganza & Classe',
-    description: 'Il coraggio di essere raffinati anche quando il mondo ti spinge verso la volgarità. La capacità di scegliere la parola giusta, il silenzio giusto, il gesto giusto.'
-  },
-  {
-    icon: Heart,
-    title: 'Amore per Sé',
-    description: 'Non esiste amore per gli altri senza amore per sé stessi. Non esiste generosità senza radici profonde. Io ho imparato a volermi bene dopo avere rischiato la vita.'
-  },
-  {
-    icon: Eye,
-    title: 'Riconoscere il Valore',
-    description: 'A me piace vedere le persone brillare. È una mia attitudine naturale: vedo le potenzialità, le intuizioni, il talento. E lo incoraggio. Sempre.'
-  },
-  {
-    icon: Handshake,
-    title: 'Stima',
-    description: 'La stima è il tessuto delle relazioni sane. Quando la dai, ti elevi. Quando la ricevi, cresci. Si vince insieme, mai uno contro l\'altro.'
-  },
-  {
-    icon: Lightbulb,
-    title: 'Credere nei Sogni',
-    description: 'Credo nei sogni miei e in quelli degli altri. Perché i sogni non sono favole: sono mappe. E quando le segui con coraggio diventano percorsi.'
-  },
-  {
-    icon: Target,
-    title: 'Verità',
-    description: 'La verità non si racconta: si è. È la coerenza tra ciò che senti, ciò che dici e ciò che fai. È il coraggio di guardare in faccia le proprie ombre e restare comunque in piedi.'
+    title: 'EDUCAZIONE',
+    description: 'È ciò che ti distingue. Un faro nel buio.',
   },
   {
     icon: Flame,
-    title: 'Coraggio',
-    description: 'È la mia matrice. È ciò che mi ha salvato la vita sette volte. È la forza di entrare nei luoghi bui della mente sapendo che la luce la porti tu.'
+    title: 'CORAGGIO',
+    description: 'È energia, è vita, è lo stimolo a superare te stesso.',
+  },
+  {
+    icon: Target,
+    title: 'VERITÀ',
+    description: 'Accetta i limiti e sviluppa i talenti. Sono comunque tuoi.',
   },
   {
     icon: Scale,
-    title: 'Coerenza Interiore',
-    description: 'La coerenza per me è una religione. È identità allo stato puro. È vivere secondo i propri valori anche quando costa fatica.'
+    title: 'COERENZA',
+    description: 'Virtù rara. Appartiene a chi sa di Essere.',
   },
   {
-    icon: Users,
-    title: 'Negoziabilità del Cuore',
-    description: 'La negoziazione non è una tecnica: è un atto d\'amore verso sé stessi e verso gli altri. Si vince insieme, sempre. Mai uno contro l\'altro.'
+    icon: Star,
+    title: 'BELLEZZA',
+    description: 'È nell\u2019anima, ti fa brillare anche tra mille.',
   },
   {
-    icon: Smile,
-    title: 'Felicità',
-    description: 'Il mio valore primario: essere un portatore sano di felicità. Farla circolare. Portarla nelle aziende, nelle relazioni, nei progetti, nelle vite.'
+    icon: Gem,
+    title: 'RICCHEZZA',
+    description: 'È condivisione, è tempo. È per tutti.',
   },
 ]
 
@@ -98,34 +74,34 @@ export function Values() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            I Miei Valori
+            I Miei Valori — 8 Valori
           </motion.span>
           <motion.h2
-            className="font-serif text-4xl md:text-5xl font-bold text-navy mb-6"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-6 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Le fondamenta della{' '}
+            LE FONDAMENTA{' '}
             <span className="bg-gradient-to-r from-teal to-coral bg-clip-text text-transparent">
-              mia identità
+              DELLA MIA IDENTITÀ
             </span>
           </motion.h2>
           <motion.p
-            className="text-navy/70 text-lg max-w-2xl mx-auto"
+            className="text-navy/70 text-base md:text-lg max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            I valori non sono parole. Sono ciò che rimane quando la vita ti toglie tutto.
-            Io li ho imparati così: nell'amore, nella sofferenza, nelle rinascite.
+            I valori non sono parole, sono pietre angolari sulle quali costruire la nostra identità.
+            Vanno difesi con determinazione e coraggio, altrimenti le cicatrici saranno molto più profonde.
           </motion.p>
         </div>
 
-        {/* Values Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {/* Values Grid — 8 in 4 colonne */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {values.map((value, index) => (
             <motion.div
               key={value.title}
@@ -153,12 +129,12 @@ export function Values() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-serif text-xl text-navy font-semibold mb-3 group-hover:text-teal transition-colors duration-300">
+                  <h3 className="font-display text-xl md:text-2xl text-navy font-bold mb-3 tracking-wide group-hover:text-teal transition-colors duration-300">
                     {value.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-navy/70 text-sm leading-relaxed">
+                  <p className="text-navy/70 text-sm md:text-[15px] leading-relaxed">
                     {value.description}
                   </p>
                 </div>

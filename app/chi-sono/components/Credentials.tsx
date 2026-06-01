@@ -1,44 +1,50 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { GraduationCap, BookOpen, Award, Cpu, FlaskConical, University } from 'lucide-react'
+import { GraduationCap, BookOpen, Award, Heart, FlaskConical, University } from 'lucide-react'
 
 const credentials = [
   {
     icon: GraduationCap,
-    title: 'Laurea in Scienze Politiche',
-    detail: '110 e Lode',
-    description: 'Un percorso accademico completato con il massimo dei voti, a conferma di una formazione rigorosa e multidisciplinare.',
+    tag: 'Lo Studio',
+    title: 'Scienze Politiche',
+    description:
+      'Dopo aver interrotto Giurisprudenza per ragioni di lavoro a 24 anni, al mio 60° anno mi sono laureato «cum laude» con una tesi sulle Tecniche di Negoziazione.',
   },
   {
     icon: University,
+    tag: "L'Università",
     title: 'Docente Universitario',
-    detail: 'Negoziazione e Analisi del Comportamento',
-    description: 'Insegno all\'università integrando neuroscienze, psicologia applicata e analisi comportamentale nel contesto professionale.',
+    description:
+      'Dopo il master in «Analisi del Comportamento» ho ottenuto una docenza in «Tecniche di Negoziazione — storia ed evoluzione».',
   },
   {
     icon: FlaskConical,
-    title: 'Ricercatore Scientifico',
-    detail: 'ResearchGate',
-    description: 'Pubblico ricerche scientifiche su comportamento, neuroscienze e psicologia applicata al mondo del lavoro.',
+    tag: 'La Ricerca',
+    title: 'Analisi del Comportamento',
+    description:
+      'Con Behaviour Analysis Team (Nucleo Osservatori del Comportamento) conduciamo e pubblichiamo ricerche scientifiche a sfondo sociale.',
+  },
+  {
+    icon: Heart,
+    tag: 'Non Profit',
+    title: 'Impegno Sociale',
+    description:
+      'Personalmente e in Quantum Academy sviluppiamo percorsi formativi e divulgativi destinati al mondo dell\u2019inclusione e delle disabilità.',
   },
   {
     icon: Award,
-    title: 'Accreditamento Regione Lombardia',
-    detail: 'Formatore Professionale',
-    description: 'Formatore accreditato per percorsi professionali di riqualificazione e sviluppo delle competenze.',
-  },
-  {
-    icon: Cpu,
-    title: 'Docente AI & Lavoro',
-    detail: 'Corsi Professionali',
-    description: 'Tengo corsi di formazione sull\'utilizzo dell\'intelligenza artificiale come strumento per creare opportunità di lavoro futuro.',
+    tag: 'Formazione',
+    title: 'Corsi e Docenze',
+    description:
+      'Sono accreditato a livello nazionale e svolgo attività formative per Regione Lombardia con aziende, professionisti e a sfondo sociale.',
   },
   {
     icon: BookOpen,
-    title: 'Autore & Speaker',
-    detail: '3 Libri Pubblicati',
-    description: 'Autore di In-Flow, Oltre la Diagnosi e La Guida alla Metaquantistica. Speaker in eventi e conferenze nazionali.',
+    tag: 'La Passione',
+    title: 'Autore e Speaker',
+    description:
+      'Pubblico libri su vari argomenti che trasformo in contenuti audio — particolarmente «The In-Flow Protocol», un esclusivo esperimento letterario.',
   },
 ]
 
@@ -53,9 +59,9 @@ export function Credentials() {
 
       <div className="container-custom relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 max-w-4xl mx-auto">
           <motion.span
-            className="inline-block text-teal text-sm font-medium uppercase tracking-[0.3em] mb-4"
+            className="inline-block text-teal-light text-sm font-medium uppercase tracking-[0.3em] mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -63,32 +69,35 @@ export function Credentials() {
           >
             Formazione & Ricerca
           </motion.span>
+
           <motion.h2
-            className="font-serif text-4xl md:text-5xl font-bold text-white mb-6"
+            className="font-display text-2xl md:text-3xl lg:text-[40px] font-bold text-white mb-6 leading-[1.2]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Esperienza{' '}
-            <span className="bg-gradient-to-r from-teal via-teal-light to-coral bg-clip-text text-transparent">
-              + Conoscenza
+            RICERCA SCIENTIFICA <span className="text-teal-light">+</span> ESPERIENZA PERSONALE{' '}
+            <span className="text-teal-light">=</span>{' '}
+            <span className="bg-gradient-to-r from-teal-light via-coral to-teal-light bg-clip-text text-transparent">
+              TRASFORMAZIONE PROFESSIONALE
             </span>
           </motion.h2>
+
           <motion.p
-            className="text-white/70 text-lg max-w-2xl mx-auto"
+            className="text-white/75 text-base md:text-lg leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Non insegno da manuali. Prima vivo, poi ricerco modelli scientifici,
-            poi — solo dopo aver trovato una soluzione valida — la condivido.
+            I manuali insegnano, le esperienze formano, le emozioni allineano.
+            Questa è la vera trasformazione: quando <span className="text-teal-light italic">ciò che desideri personalmente diventa un successo professionale</span>… emozionandoti.
           </motion.p>
         </div>
 
         {/* Credentials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {credentials.map((cred, index) => (
             <motion.div
               key={cred.title}
@@ -103,27 +112,22 @@ export function Credentials() {
               }}
             >
               <div className="relative h-full bg-white/5 backdrop-blur-sm rounded-2xl p-7 border border-white/10 hover:border-teal/30 transition-all duration-500 hover:bg-white/[0.08]">
-                {/* Hover glow */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-teal/20 via-transparent to-teal/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-teal/15 via-transparent to-teal/15 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
                 <div className="relative z-10">
-                  {/* Icon */}
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal to-teal-dark flex items-center justify-center mb-5 shadow-lg">
                     <cred.icon size={24} className="text-white" />
                   </div>
 
-                  {/* Detail badge */}
-                  <span className="inline-block text-teal text-xs font-medium uppercase tracking-wider mb-2">
-                    {cred.detail}
+                  <span className="inline-block text-teal-light text-[11px] font-bold uppercase tracking-[0.25em] mb-2">
+                    {cred.tag}
                   </span>
 
-                  {/* Title */}
-                  <h3 className="font-serif text-xl text-white font-bold mb-3 group-hover:text-teal-light transition-colors duration-300">
+                  <h3 className="font-display text-xl text-white font-bold mb-3 group-hover:text-teal-light transition-colors duration-300">
                     {cred.title}
                   </h3>
 
-                  {/* Description */}
-                  <p className="text-white/60 text-sm leading-relaxed">
+                  <p className="text-white/65 text-sm leading-relaxed">
                     {cred.description}
                   </p>
                 </div>
@@ -132,16 +136,17 @@ export function Credentials() {
           ))}
         </div>
 
-        {/* Bottom note */}
+        {/* Claim finale */}
         <motion.div
-          className="text-center mt-12"
+          className="text-center mt-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <p className="text-white/60 text-sm italic">
-            Affidabilità nasce dall'esperienza. Credibilità nasce dallo studio.
+          <p className="font-serif italic text-cream/85 text-lg md:text-2xl leading-relaxed max-w-2xl mx-auto">
+            &laquo;Rispetta ciò che sei. Offri ciò che sai.{' '}
+            <span className="text-teal-light">Ottieni ciò che vuoi.</span>&raquo;
           </p>
         </motion.div>
       </div>

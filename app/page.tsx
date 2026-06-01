@@ -4,8 +4,9 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
-import { ArrowRight, ChevronRight, ChevronLeft, Target, Eye, Shield, Users, Brain, Star, Compass, Sparkles, Quote, ArrowUpRight, GraduationCap, Building2, Globe, Handshake, CheckCircle, RefreshCw, TrendingUp } from 'lucide-react'
+import { ArrowRight, ChevronRight, ChevronLeft, Target, Eye, Shield, Users, Brain, Star, Compass, Sparkles, Quote, ArrowUpRight, GraduationCap, Building2, Globe, Handshake, CheckCircle, RefreshCw, TrendingUp, ImageOff as ImageIcon } from 'lucide-react'
 import { InFlowSection } from '@/components/sections/InFlowSection'
+import { AlphaTeamSection } from '@/components/sections/AlphaTeamSection'
 import { AliceHomepageSection } from '@/components/alice/AliceHomepageSection'
 
 // Animation variants - optimized for performance
@@ -45,31 +46,66 @@ const scaleIn = {
   }
 }
 
-// Hero Slider Data
-const heroSlides = [
+// Hero Slider Data — 4 slide, una per area del Metodo AlphaKom
+interface HeroSlide {
+  image: string
+  alt: string
+  label: string
+  title: string
+  highlight: string
+  description: string
+  ctaText: string
+  ctaHref: string
+  ctaSecondaryText?: string
+  motto?: string
+  showLogoOverlay: boolean
+}
+const heroSlides: HeroSlide[] = [
   {
-    image: '/images/hero-1.jpg',
-    alt: 'Luca Pellicari - Identity Coach e fondatore di Quantum Academy',
-    subtitle: 'Benvenuto',
-    title: 'Adesso siamo qui,',
-    highlight: 'tu ed io.',
-    description: 'E sono felice che tu sia arrivato.',
+    image: '/images/hero/slide-1-bao.png',
+    alt: 'Luca Pellicari - Le Origini (BAO XIII GRACO)',
+    label: 'LE ORIGINI',
+    title: 'Disciplina, coraggio,',
+    highlight: 'identità.',
+    description: 'Dove nasce la Comunicazione Alpha: tra disciplina militare e radici cimbre.',
+    ctaText: 'Scopri chi sono',
+    ctaHref: '/chi-sono',
+    showLogoOverlay: true,
   },
   {
-    image: '/images/hero-2.jpg',
-    alt: 'Percorso di trasformazione identitaria',
-    subtitle: 'La Porta',
-    title: 'Questa non è',
-    highlight: 'una pagina web.',
-    description: 'È una porta. La porta che conduce alla tua identità profonda, alla tua visione, alla tua verità.',
+    image: '/images/hero/slide-2-piramis.png',
+    alt: 'Luca Pellicari - L\'evoluzione (Piramis Group)',
+    label: "L'EVOLUZIONE",
+    title: 'La comunicazione',
+    highlight: 'diventa metodo.',
+    description: 'Dal palco al campo: il metodo Alpha prende forma. Replicabile. Solido.',
+    ctaText: 'Scopri il percorso',
+    ctaHref: '/percorsi',
+    showLogoOverlay: true,
   },
   {
-    image: '/images/hero-3.jpg',
-    alt: 'Viaggio di crescita personale e consapevolezza',
-    subtitle: 'Il Viaggio',
-    title: 'Sei pronto ad andare',
-    highlight: 'oltre?',
-    description: 'Oltre la maschera. Oltre il ruolo. Oltre ciò che fai. Per incontrare ciò che sei.',
+    image: '/images/hero/slide-3-gran-guardia.png',
+    alt: 'Luca Pellicari - La trasformazione (Gran Guardia Verona 2016)',
+    label: 'LA TRASFORMAZIONE',
+    title: 'Quando l\'esperienza',
+    highlight: 'diventa metodo.',
+    description: 'AlphaKom: il framework che trasforma obiettivi personali in successi professionali.',
+    ctaText: 'Scopri AlphaKom',
+    ctaHref: '/alphakom',
+    showLogoOverlay: true,
+  },
+  {
+    image: '/images/hero/slide-4-liberta.png',
+    alt: 'Luca Pellicari - La libertà',
+    label: 'LA LIBERTÀ',
+    title: 'La libertà di',
+    highlight: 'essere chi sei.',
+    description: 'Il compimento della Grande Opera: risultati stabili, replicabili, condivisibili.',
+    ctaText: 'Contattami',
+    ctaHref: '/contatti',
+    ctaSecondaryText: 'Parla con Alice',
+    motto: 'Surgo ex clade.',
+    showLogoOverlay: false,
   },
 ]
 
@@ -168,15 +204,33 @@ function HeroSection() {
       <div className="hidden md:block absolute top-32 left-8 w-24 h-24 border-l border-t border-cream/10 rounded-tl-3xl" />
       <div className="hidden md:block absolute bottom-32 right-8 w-24 h-24 border-r border-b border-teal/10 rounded-br-3xl" />
 
+      {/* Ticker / banner overlay - claim generale */}
+      <div className="absolute top-20 md:top-24 left-0 right-0 z-20 pointer-events-none">
+        <div className="w-full px-6 md:px-16 lg:px-24">
+          <p className="text-cream/70 text-[10px] md:text-[12px] uppercase tracking-[0.35em] font-semibold">
+            Trasformare obiettivi personali in successi professionali
+          </p>
+        </div>
+      </div>
+
+      {/* Logo PELLICARI overlay (slide 1-3) */}
+      {heroSlides[currentSlide].showLogoOverlay && (
+        <div className="absolute top-32 md:top-36 left-6 md:left-16 lg:left-24 z-20 pointer-events-none">
+          <span className="font-display text-cream tracking-[0.4em] text-base md:text-lg font-semibold">
+            PELLICARI
+          </span>
+        </div>
+      )}
+
       {/* Content */}
       <motion.div className="relative z-10 h-full flex items-center" style={{ opacity }}>
         <div className="w-full px-6 md:px-16 lg:px-24">
           <div className="max-w-3xl">
-            {/* Subtitle with line */}
+            {/* Slide label */}
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-px bg-teal-light" />
-              <span className="text-teal-light text-sm uppercase tracking-[0.2em] font-medium">
-                {heroSlides[currentSlide].subtitle}
+              <span className="text-teal-light text-sm uppercase tracking-[0.25em] font-semibold">
+                {heroSlides[currentSlide].label}
               </span>
             </div>
 
@@ -196,7 +250,7 @@ function HeroSection() {
               ))}
             </div>
 
-            <div className="relative min-h-[4.5rem] md:min-h-[4rem] mb-12">
+            <div className="relative min-h-[4.5rem] md:min-h-[4rem] mb-8">
               {heroSlides.map((slide, index) => (
                 <p
                   key={index}
@@ -209,16 +263,32 @@ function HeroSection() {
               ))}
             </div>
 
+            {/* Motto (solo slide 4) */}
+            {heroSlides[currentSlide].motto && (
+              <p className="font-serif italic text-cream/60 text-sm md:text-base mb-6 tracking-wide">
+                {heroSlides[currentSlide].motto}
+              </p>
+            )}
+
             <div className="flex flex-wrap gap-4 md:gap-5">
-              <Link href="/chi-sono" className="group relative inline-flex items-center gap-3 bg-teal text-white px-7 md:px-9 py-3.5 md:py-4 rounded-full font-semibold overflow-hidden shadow-xl shadow-teal/25 hover:shadow-2xl hover:shadow-teal/35 transition-all duration-500 hover:-translate-y-0.5">
-                <span className="relative z-10">Scopri chi sono</span>
+              <Link href={heroSlides[currentSlide].ctaHref} className="group relative inline-flex items-center gap-3 bg-teal text-white px-7 md:px-9 py-3.5 md:py-4 rounded-full font-semibold overflow-hidden shadow-xl shadow-teal/25 hover:shadow-2xl hover:shadow-teal/35 transition-all duration-500 hover:-translate-y-0.5">
+                <span className="relative z-10">{heroSlides[currentSlide].ctaText}</span>
                 <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-teal-dark opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </Link>
-              <Link href="/contatti" className="group relative inline-flex items-center gap-3 px-7 md:px-9 py-3.5 md:py-4 border border-cream/30 text-cream rounded-full font-medium backdrop-blur-sm hover:border-cream/60 hover:bg-white/5 transition-all duration-300">
-                <span>Contattami</span>
-                <ArrowUpRight className="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
-              </Link>
+              {heroSlides[currentSlide].ctaSecondaryText && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const evt = new CustomEvent('alice:open')
+                    window.dispatchEvent(evt)
+                  }}
+                  className="group relative inline-flex items-center gap-3 px-7 md:px-9 py-3.5 md:py-4 border border-cream/30 text-cream rounded-full font-medium backdrop-blur-sm hover:border-cream/60 hover:bg-white/5 transition-all duration-300"
+                >
+                  <span>{heroSlides[currentSlide].ctaSecondaryText}</span>
+                  <ArrowUpRight className="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -315,12 +385,12 @@ function OpeningSection() {
             <motion.div variants={fadeUp} className="flex items-center gap-4 mb-12">
               <span className="w-10 h-[2px] bg-gradient-to-r from-teal-light to-teal-light/0" />
               <span className="text-teal-light/70 text-[13px] uppercase tracking-[0.25em] font-semibold">
-                Una verità semplice
+                Una verità semplice, la mia
               </span>
             </motion.div>
 
             {/* Negation lines — progressive fade */}
-            <motion.div variants={fadeUp} className="space-y-4 mb-16">
+            <motion.div variants={fadeUp} className="space-y-4 mb-12">
               {[
                 { text: 'Io non sono un formatore.', opacity: 'text-cream/25' },
                 { text: 'Non sono un motivatore.', opacity: 'text-cream/20' },
@@ -332,8 +402,20 @@ function OpeningSection() {
               ))}
             </motion.div>
 
+            {/* Paragraph CONDIVIDO */}
+            <motion.p variants={fadeUp} className="text-cream/75 text-[17px] md:text-[18px] leading-[1.8] mb-8">
+              Si dice che &ldquo;chi non sa fare insegna&rdquo;. Io non insegno:{' '}
+              <span className="font-bold uppercase text-teal-light">CONDIVIDO</span>.{' '}
+              Perché sono un uomo che ha studiato molto e vissuto di più.
+            </motion.p>
+
+            {/* Motto */}
+            <motion.p variants={fadeUp} className="font-serif italic text-teal-light/80 text-[15px] md:text-[16px] mb-12 leading-relaxed">
+              &ldquo;Rispetta ciò che sei. Offri ciò che sai. Ottieni ciò che vuoi.&rdquo;
+            </motion.p>
+
             {/* Divider */}
-            <motion.div variants={fadeUp} className="flex items-center gap-4 mb-12">
+            <motion.div variants={fadeUp} className="flex items-center gap-4 mb-10">
               <div className="h-[2px] w-12 bg-gradient-to-r from-teal-light to-transparent" />
               <div className="h-[2px] w-4 bg-teal-light/30" />
             </motion.div>
@@ -369,10 +451,10 @@ function OpeningSection() {
             {/* Opening statement */}
             <motion.p
               variants={fadeUp}
-              className="font-serif text-[22px] md:text-[26px] text-navy/65 italic leading-[1.6] mb-12"
+              className="font-serif text-[22px] md:text-[26px] text-navy/70 italic leading-[1.6] mb-12"
             >
-              E oggi ho scelto di mettere tutta la mia esperienza al servizio delle persone che vogliono finalmente{' '}
-              <span className="text-teal font-bold not-italic">riconoscersi</span>.
+              E ciò che condivido non è teoria. È trent&apos;anni di vita vissuta trasformati in un metodo. Collaudato sul campo. Replicabile.{' '}
+              <span className="text-teal font-bold not-italic">Tuo.</span>
             </motion.p>
 
             {/* Callout card */}
@@ -383,40 +465,54 @@ function OpeningSection() {
               {/* Accent bar */}
               <div className="absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-gradient-to-b from-teal to-teal/30" />
               <p className="text-navy/80 text-[17px] leading-[1.75] pl-4">
-                Se sei qui, se sei arrivato fino a questa riga, è perché una parte di te sente che{' '}
-                <span className="text-teal font-bold">è il momento di andare oltre</span>.
+                Non esistono risultati professionali duraturi senza una base identitaria solida.{' '}
+                <span className="text-teal font-bold">Prima costruiamo quella.</span>{' '}
+                Poi tutto il resto viene da sé.
               </p>
             </motion.div>
 
-            {/* "Oltre" items */}
+            {/* Label sopra bullets */}
+            <motion.p variants={fadeUp} className="text-teal text-[13px] uppercase tracking-[0.25em] font-semibold mb-6">
+              Il Metodo AlphaKom in 4 fasi:
+            </motion.p>
+
+            {/* 4 fasi del Metodo */}
             <motion.div variants={fadeUp} className="space-y-0">
               {[
-                { text: 'Oltre la maschera', color: 'bg-teal', hoverColor: 'group-hover:text-teal' },
-                { text: 'Oltre il ruolo', color: 'bg-teal-dark', hoverColor: 'group-hover:text-teal-dark' },
-                { text: 'Per incontrare chi sei', color: 'bg-navy', hoverColor: 'group-hover:text-navy-dark' },
+                {
+                  title: 'ANALISI',
+                  desc: 'Costruiamo insieme la tua identità personale e professionale. Il punto di partenza di ogni progetto vero. Come in medicina: prima l\u2019anamnesi.',
+                  color: 'bg-teal',
+                },
+                {
+                  title: 'IL PROGETTO ESCLUSIVO',
+                  desc: 'Definiamo modalità, tempi e obiettivi del tuo percorso. Perché <em>ciò che va bene per tutti non funziona per nessuno</em>. Come in medicina: la diagnosi è sempre individuale.',
+                  color: 'bg-teal-dark',
+                },
+                {
+                  title: 'IL METODO ALPHA',
+                  desc: 'Entriamo nelle practices. I canvas di progetto prendono forma. È qui che il <strong>Flow</strong> si attiva e genera <strong>Inflow</strong>.',
+                  color: 'bg-navy',
+                },
+                {
+                  title: 'LA TRASFORMAZIONE',
+                  desc: 'Il compimento della <em>Grande Opera</em>. Obiettivi realizzati, stabili e replicabili. Una ricchezza che non è solo finanziaria — è condivisibile.',
+                  color: 'bg-teal',
+                },
               ].map((item, i) => (
-                <div
-                  key={i}
-                  className="group flex items-center gap-5 py-4 border-b border-navy/5 last:border-b-0 cursor-default"
-                >
-                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-navy/[0.04] flex items-center justify-center group-hover:bg-navy/[0.08] transition-colors duration-300">
-                    <span className={`w-2 h-2 rounded-full ${item.color} group-hover:scale-125 transition-transform duration-300`} />
+                <div key={i} className="group flex items-start gap-5 py-5 border-b border-navy/5 last:border-b-0 cursor-default">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-navy/[0.04] flex items-center justify-center mt-1">
+                    <span className={`w-2 h-2 rounded-full ${item.color}`} />
                   </div>
-                  <span className={`text-navy/80 text-[18px] font-semibold tracking-tight group-hover:translate-x-1 ${item.hoverColor} transition-all duration-300`}>
-                    {item.text}
-                  </span>
+                  <div>
+                    <p className="text-navy font-bold tracking-wide text-[15px] uppercase mb-1.5">{item.title}</p>
+                    <p
+                      className="text-navy/70 text-[15px] leading-[1.7]"
+                      dangerouslySetInnerHTML={{ __html: item.desc }}
+                    />
+                  </div>
                 </div>
               ))}
-            </motion.div>
-
-            {/* Closing line */}
-            <motion.div
-              variants={fadeUp}
-              className="mt-14 pt-7 border-t border-navy/8"
-            >
-              <p className="text-navy/45 text-[15px] font-sans tracking-wide leading-relaxed">
-                Lascia che ti dica una cosa semplice e vera.
-              </p>
             </motion.div>
           </motion.div>
         </div>
@@ -459,20 +555,24 @@ function ChiSonoSection() {
                 <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-navy-dark/30 to-transparent" />
               </div>
 
-              {/* Floating Stats Card */}
+              {/* Floating Stats Card — 4 voci */}
               <div className="absolute -bottom-6 -right-4 md:-bottom-8 md:-right-6 bg-white rounded-2xl p-4 md:p-6 shadow-xl shadow-navy/8 border border-navy/5">
-                <div className="grid grid-cols-3 gap-4 md:gap-6 text-center">
+                <div className="grid grid-cols-4 gap-3 md:gap-5 text-center">
                   <div>
-                    <p className="text-[24px] md:text-[32px] font-display text-teal leading-none mb-1"><AnimatedNumber value={7} /></p>
-                    <p className="text-[9px] md:text-[11px] text-navy/50 uppercase tracking-[0.12em] md:tracking-[0.15em] font-semibold">Rinascite</p>
+                    <p className="text-[22px] md:text-[28px] font-display text-teal leading-none mb-1"><AnimatedNumber value={3} /></p>
+                    <p className="text-[9px] md:text-[10px] text-navy/50 uppercase tracking-[0.1em] font-semibold">Rinascite</p>
                   </div>
-                  <div className="border-x border-navy/6 px-1 md:px-2">
-                    <p className="text-[24px] md:text-[32px] font-display text-teal leading-none mb-1"><AnimatedNumber value={30} suffix="+" /></p>
-                    <p className="text-[9px] md:text-[11px] text-navy/50 uppercase tracking-[0.12em] md:tracking-[0.15em] font-semibold">Anni</p>
+                  <div className="border-l border-navy/6 pl-3">
+                    <p className="text-[22px] md:text-[28px] font-display text-teal leading-none mb-1"><AnimatedNumber value={10} /></p>
+                    <p className="text-[9px] md:text-[10px] text-navy/50 uppercase tracking-[0.1em] font-semibold">Vite</p>
                   </div>
-                  <div>
-                    <p className="text-[24px] md:text-[32px] font-display text-navy-dark leading-none mb-1"><AnimatedNumber value={1000} suffix="+" /></p>
-                    <p className="text-[9px] md:text-[11px] text-navy/50 uppercase tracking-[0.12em] md:tracking-[0.15em] font-semibold">Vite</p>
+                  <div className="border-l border-navy/6 pl-3">
+                    <p className="text-[22px] md:text-[28px] font-display text-teal leading-none mb-1"><AnimatedNumber value={40} suffix="+" /></p>
+                    <p className="text-[9px] md:text-[10px] text-navy/50 uppercase tracking-[0.1em] font-semibold">Anni Studio</p>
+                  </div>
+                  <div className="border-l border-navy/6 pl-3">
+                    <p className="text-[22px] md:text-[28px] font-display text-navy-dark leading-none mb-1"><AnimatedNumber value={60} suffix="+" /></p>
+                    <p className="text-[9px] md:text-[10px] text-navy/50 uppercase tracking-[0.1em] font-semibold">Esperienze</p>
                   </div>
                 </div>
               </div>
@@ -495,21 +595,22 @@ function ChiSonoSection() {
 
             {/* Name */}
             <motion.h2 variants={fadeUp} className="font-display text-[40px] md:text-[52px] lg:text-[60px] text-navy-dark mb-5 tracking-tight leading-[1.05]">
-              Io sono Luca Pellicari
+              Io sono Luca Pellicari.
             </motion.h2>
 
-            {/* Role subtitle */}
-            <motion.p variants={fadeUp} className="font-serif text-[19px] md:text-[21px] text-navy/50 italic mb-8 leading-relaxed">
-              Identity Coach &bull; Autore &bull; Fondatore di Quantum Academy
+            {/* Sottotitolo */}
+            <motion.p variants={fadeUp} className="font-serif text-[19px] md:text-[21px] text-navy/55 italic mb-8 leading-relaxed">
+              Non sono qui per motivarti. Sono qui per aiutarti a diventare ciò che già sei.
             </motion.p>
 
-            {/* Credential badges — refined */}
+            {/* Credential badges */}
             <motion.div variants={fadeUp} className="flex flex-wrap gap-2.5 mb-10">
               {[
-                { text: 'Laurea in Scienze Politiche — 110 e Lode', accent: true },
+                { text: 'Fondatore AlphaKom & Quantum Academy', accent: true },
+                { text: 'Autore', accent: false },
                 { text: 'Docente Universitario', accent: false },
-                { text: 'Ricercatore ResearchGate', accent: false },
-                { text: 'Accreditato Regione Lombardia', accent: false },
+                { text: 'Ricercatore', accent: false },
+                { text: 'Analista del Comportamento', accent: false },
               ].map((badge) => (
                 <span
                   key={badge.text}
@@ -526,28 +627,27 @@ function ChiSonoSection() {
             </motion.div>
 
             {/* Body text */}
-            <motion.div variants={fadeUp} className="space-y-5 mb-12">
+            <motion.div variants={fadeUp} className="space-y-5 mb-10">
               <p className="text-navy/70 text-[18px] leading-[1.8]">
-                Sono un uomo che non ha mai avuto paura di guardare la vita negli occhi.
-                Ho attraversato la malattia, la rinascita, la disciplina del paracadutismo,
-                i fallimenti, la rinascita professionale.
+                Ho vissuto molte rinascite. La malattia. La disciplina militare. Le sconfitte. La ricostruzione. L&apos;esperienza.
+                Ogni volta ho perso qualcosa. Ogni volta ho guadagnato qualcosa di ancora più grande.
               </p>
               <p className="text-navy/70 text-[18px] leading-[1.8]">
-                E ho trasformato tutto in un metodo: <span className="text-teal font-bold">In-Flow</span>.
+                Ho trasformato tutto questo in un metodo personale. Non per insegnarlo — per condividerlo.
+                Non è solo formazione, è <span className="font-bold uppercase text-teal">TRASFORMAZIONE</span>,
+                perché ciò che non si è vissuto non si può trasmettere. E io ho vissuto tutto ciò di cui ti parlo.
               </p>
             </motion.div>
 
-            {/* Quote — editorial style */}
+            {/* Claim chiusura — motto */}
             <motion.blockquote
               variants={fadeUp}
               className="relative pl-7 py-4 mb-12"
             >
               <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-full bg-gradient-to-b from-teal to-teal/20" />
               <p className="text-[22px] md:text-[26px] font-serif italic text-navy-dark leading-[1.45]">
-                Il mio talento non è motivarti.
-              </p>
-              <p className="text-[22px] md:text-[26px] font-serif italic text-teal leading-[1.45] mt-1">
-                Il mio talento è aiutarti a ricordare chi sei.
+                &ldquo;Rispetta ciò che sei. Offri ciò che sai.{' '}
+                <span className="text-teal">Ottieni ciò che vuoi.</span>&rdquo;
               </p>
             </motion.blockquote>
 
@@ -575,14 +675,14 @@ function ChiSonoSection() {
 // MISSIONE SECTION - Bento Grid
 // ============================================
 const missionItems = [
-  { icon: Eye, label: 'Identità', desc: 'Chi sei veramente' },
-  { icon: Target, label: 'Visione', desc: 'Dove stai andando' },
-  { icon: Shield, label: 'Verità', desc: 'La tua essenza' },
-  { icon: Users, label: 'Relazioni', desc: 'Connessioni autentiche' },
-  { icon: Brain, label: 'Consapevolezza', desc: 'Presenza totale' },
-  { icon: Sparkles, label: 'Metaquantistica', desc: 'Scienza della coscienza' },
-  { icon: Star, label: 'Leadership Alpha', desc: 'Guida naturale' },
-  { icon: Compass, label: 'In-Flow', desc: 'Stato naturale' },
+  { icon: Eye, label: 'Identità', desc: 'La base che non tradisce' },
+  { icon: Target, label: 'Visione', desc: 'Dove vuoi arrivare davvero' },
+  { icon: Star, label: 'Leadership Alpha', desc: 'Riconosciuto — non imposto' },
+  { icon: Brain, label: 'Analisi', desc: 'Vedere prima degli altri' },
+  { icon: Users, label: 'Relazioni', desc: 'Il tuo capitale invisibile' },
+  { icon: Handshake, label: 'Negoziazione', desc: 'Ogni accordo è una scelta' },
+  { icon: Shield, label: 'Il Metodo', desc: 'Collaudato sul campo' },
+  { icon: Compass, label: 'In-Flow', desc: 'Flow che genera Inflow' },
 ]
 
 function MissioneSection() {
@@ -596,12 +696,13 @@ function MissioneSection() {
             <span className="text-teal text-[13px] uppercase tracking-[0.2em] font-semibold">La Mia Missione</span>
             <span className="w-10 h-[2px] bg-gradient-to-l from-transparent to-teal/40" />
           </div>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-navy-dark mb-6 tracking-tight">
-            Trasformo le persone aiutandole a riconoscersi.
+          <h2 className="font-display text-2xl md:text-4xl lg:text-[44px] text-navy-dark mb-6 tracking-tight max-w-4xl mx-auto leading-[1.2]">
+            Guido professionisti e imprenditori a costruire la propria identità operativa.{' '}
+            <span className="text-teal italic">Con metodo. Con esperienza. Con risultati.</span>
           </h2>
-          <p className="text-base md:text-lg text-navy/60 max-w-xl mx-auto leading-relaxed">
-            Il mio lavoro è semplice: ti porto dentro te stesso.
-            Lo faccio con delicatezza, con forza, con consapevolezza e con verità.
+          <p className="text-base md:text-lg text-navy/60 max-w-2xl mx-auto leading-relaxed">
+            Il mio lavoro è preciso: ti aiuto a costruire la tua identità operativa.
+            Con metodo. Con esperienza. Con risultati stabili e ripetibili.
           </p>
         </div>
 
@@ -656,18 +757,23 @@ function IlVeroProblemaSection() {
         >
           <motion.div variants={fadeUp} className="flex items-center justify-center gap-4 mb-8">
             <span className="w-10 h-[2px] bg-gradient-to-r from-transparent to-teal/40" />
-            <span className="text-teal text-[13px] uppercase tracking-[0.2em] font-semibold">Il Vero Problema</span>
+            <span className="text-teal text-[13px] uppercase tracking-[0.2em] font-semibold">Fortuna o Disciplina</span>
             <span className="w-10 h-[2px] bg-gradient-to-l from-transparent to-teal/40" />
           </motion.div>
 
-          <motion.h2 variants={fadeUp} className="font-display text-3xl md:text-5xl lg:text-6xl text-navy mb-6 md:mb-8 tracking-tight leading-tight">
-            Il problema non è ottenere risultati.{' '}
-            <span className="text-teal italic">È mantenerli.</span>
+          <motion.h2 variants={fadeUp} className="font-display text-2xl md:text-4xl lg:text-5xl text-navy mb-4 tracking-tight leading-[1.2] italic max-w-4xl mx-auto">
+            &ldquo;Più mi alleno e più sono fortunato.&rdquo;
           </motion.h2>
+          <motion.p variants={fadeUp} className="text-teal font-semibold text-sm md:text-base tracking-widest uppercase mb-10">
+            — Arnold Palmer
+          </motion.p>
 
-          <motion.p variants={fadeUp} className="text-base md:text-xl text-navy/60 max-w-2xl mx-auto leading-relaxed">
-            Quando si lavora bene, i risultati arrivano. Ma il vero problema è un altro:
-            è renderli coerenti, stabili e replicabili. E questo è il cuore di tutto quello che faccio.
+          <motion.p variants={fadeUp} className="font-display text-xl md:text-3xl lg:text-4xl text-navy/85 max-w-3xl mx-auto leading-[1.35] mb-3">
+            Di me dicono che sono un uomo fortunato. Ma io non lo credo:{' '}
+            <span className="text-teal italic">la mia fortuna si chiama disciplina e coraggio.</span>
+          </motion.p>
+          <motion.p variants={fadeUp} className="text-teal font-semibold text-sm md:text-base tracking-widest uppercase">
+            — Luca Pellicari
           </motion.p>
         </motion.div>
 
@@ -683,17 +789,17 @@ function IlVeroProblemaSection() {
             {
               icon: CheckCircle,
               title: 'Coerenti',
-              description: 'Allineati con ciò che l\'impresa rappresenta realmente — la sua identità. Non risultati casuali, ma risultati che rispecchiano chi sei.',
+              description: 'Allineati con chi sei davvero. Non con chi ti hanno detto di essere. Quando l\u2019identità e l\u2019azione coincidono i risultati non sorprendono. Confermano. E non è fortuna.',
             },
             {
               icon: RefreshCw,
               title: 'Stabili',
-              description: 'Non dipendono dall\'entusiasmo del momento, ma da una struttura solida. È la struttura che genera risultati che durano.',
+              description: 'Non dipendono dalla fortuna. Dipendono dalla struttura che hai costruito, dal tuo Flow. La disciplina non è un sacrificio. È la forma più alta di rispetto verso sé stessi.',
             },
             {
               icon: TrendingUp,
               title: 'Replicabili',
-              description: 'Premiano tutta la filiera, dall\'addetto alle pulizie al top-manager. Risultati condivisibili che creano ricchezza per tutti.',
+              description: 'Ogni volta. Non per caso. Perché tu sai esattamente cosa hai fatto, come lo hai fatto e perché è funzionato. Questo si chiama metodo. Non fortuna.',
             },
           ].map((item, index) => (
             <motion.div
@@ -727,10 +833,13 @@ function IlVeroProblemaSection() {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="text-center mt-10 md:mt-16"
         >
-          <div className="inline-flex items-center gap-3 md:gap-4 bg-navy text-white rounded-full px-5 md:px-8 py-3 md:py-4 shadow-lg shadow-navy/10">
+          <div className="inline-flex flex-wrap items-center justify-center gap-3 md:gap-4 bg-navy text-white rounded-full px-5 md:px-8 py-3 md:py-4 shadow-lg shadow-navy/10 max-w-3xl mx-auto">
             <span className="w-2 h-2 rounded-full bg-teal-light animate-pulse motion-reduce:animate-none flex-shrink-0" />
-            <p className="font-medium text-sm md:text-base">
-              Io non vendo contenuti. Non vendo motivazione. Lavoro sulla <span className="text-teal-light">struttura</span>.
+            <p className="font-medium text-sm md:text-base text-center">
+              Non vendo informazioni utili. Non regalo pillole di successo. Costruiamo insieme il{' '}
+              <span className="font-bold uppercase">TUO</span>{' '}
+              <span className="text-teal-light font-semibold">Flow</span>.{' '}
+              Quello che genera <span className="text-teal-light font-semibold">Inflow</span> — ogni volta.
             </p>
           </div>
         </motion.div>
@@ -767,22 +876,18 @@ function QuantumAcademySection() {
               Il sogno che non sapevo di sognare, diventato realtà.
             </motion.h2>
 
-            <motion.div variants={fadeUp} className="space-y-6 text-white/70 text-base md:text-lg mb-8">
-              <p className="text-teal-light text-lg md:text-xl font-medium">Quantum Academy non è una scuola.</p>
-              <p>È un luogo di trasformazione. È un portale. È un laboratorio di identità.</p>
-            </motion.div>
-
-            {/* Founders */}
-            <motion.div variants={fadeUp} className="mb-10">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="flex -space-x-2">
-                  <div className="w-10 h-10 rounded-full bg-teal/30 border-2 border-navy-dark flex items-center justify-center text-xs text-white font-medium">LP</div>
-                  <div className="w-10 h-10 rounded-full bg-teal-light/30 border-2 border-navy-dark flex items-center justify-center text-xs text-white font-medium">L</div>
-                  <div className="w-10 h-10 rounded-full bg-white/20 border-2 border-navy-dark flex items-center justify-center text-xs text-white font-medium">A</div>
-                </div>
-                <p className="text-white/60 text-sm">È nata da tre anime in risonanza: <span className="text-white">io, Lucia e Alberto</span>.</p>
-              </div>
-              <p className="text-white/70 pl-14">E oggi sta diventando una nuova forma di conoscenza: <span className="text-teal-light">pratica, profonda, scientifica, spirituale</span>.</p>
+            <motion.div variants={fadeUp} className="space-y-5 text-white/70 text-base md:text-lg mb-10">
+              <p className="text-teal-light text-lg md:text-xl font-medium">
+                Quantum Academy non è una scuola.
+              </p>
+              <p>
+                È il luogo dove l&apos;esperienza diventa metodo e il metodo diventa libertà.
+              </p>
+              <p>
+                Dieci anni di lavoro sul campo. Centinaia di professionisti, imprenditori, manager.
+                Una sola domanda sempre al centro:{' '}
+                <span className="text-teal-light font-medium">chi vuoi diventare davvero?</span>
+              </p>
             </motion.div>
 
             <motion.div variants={fadeUp}>
@@ -805,8 +910,8 @@ function QuantumAcademySection() {
           >
             <div className="aspect-square rounded-3xl overflow-hidden border border-white/10 relative">
               <Image
-                src="/images/quantum-academy.jpg"
-                alt="Quantum Academy"
+                src="/images/quantum-team.jpg"
+                alt="Lucia, Alberto e Luca — i tre fondatori di Quantum Academy"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -815,6 +920,10 @@ function QuantumAcademySection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/60 via-transparent to-transparent" />
             </div>
+            {/* Caption foto */}
+            <p className="mt-5 font-serif italic text-center text-teal-light/85 text-sm md:text-base px-4">
+              Lucia, Alberto e Luca — i tre fondatori. Un&apos;idea, tre vite, una missione comune.
+            </p>
             {/* Decorative Elements */}
             <div className="hidden md:block absolute -bottom-4 -right-4 w-24 h-24 border-2 border-teal/30 rounded-2xl" />
             <div className="hidden md:block absolute -top-4 -left-4 w-16 h-16 bg-teal/20 rounded-xl blur-xl" />
@@ -830,11 +939,10 @@ function QuantumAcademySection() {
 // ============================================
 function AlphakomSection() {
   const points = [
-    { text: 'Impari a guidare, non a seguire.', highlight: false },
-    { text: 'A vedere, non a reagire.', highlight: false },
-    { text: 'A influenzare in modo consapevole.', highlight: false },
-    { text: 'A creare ricchezza — economica, relazionale, spirituale.', highlight: false },
-    { text: 'A entrare nel tuo stato naturale: In-Flow.', highlight: true },
+    { text: 'Costruiamo le tue 4 identità operative. Sono le fondamenta del tuo successo.', highlight: false },
+    { text: 'Individuiamo il tuo metodo personale, esclusivo Alpha.', highlight: false },
+    { text: 'Trasformiamo il metodo in un framework operativo. Creiamo il Flow.', highlight: false },
+    { text: 'Consolidiamo i risultati e li rendiamo replicabili.', highlight: true },
   ]
 
   return (
@@ -850,8 +958,8 @@ function AlphakomSection() {
           >
             <div className="aspect-[4/5] rounded-3xl overflow-hidden relative shadow-2xl">
               <Image
-                src="/images/luca-speaking.jpg"
-                alt="Alphakom"
+                src="/images/alphakom-luca-palco.png"
+                alt="Luca Pellicari sul palco — AlphaKom"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -875,8 +983,10 @@ function AlphakomSection() {
               <span className="text-teal text-[13px] uppercase tracking-[0.2em] font-semibold">AlphaKom</span>
             </motion.div>
 
-            <motion.h2 variants={fadeUp} className="font-display text-3xl md:text-4xl lg:text-5xl text-navy mb-3">
-              Il Metodo che Trasforma.
+            <motion.h2 variants={fadeUp} className="font-display text-2xl md:text-3xl lg:text-[40px] text-navy mb-3 leading-[1.2]">
+              AlphaKom non è un corso. È il metodo che trasforma i tuoi{' '}
+              <span className="text-teal italic">obiettivi personali</span> in{' '}
+              <span className="text-teal italic">successi professionali</span>.
             </motion.h2>
 
             <motion.p variants={fadeUp} className="text-xs text-navy/55 font-medium tracking-[0.12em] uppercase mb-10">
@@ -906,7 +1016,7 @@ function AlphakomSection() {
             <motion.div variants={fadeUp}>
               <Link href="/alphakom" className="group relative inline-flex items-center gap-3 text-navy font-medium">
                 <span className="relative">
-                  Scopri Alphakom
+                  Scopri AlphaKom
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-teal group-hover:w-full transition-all duration-300" />
                 </span>
                 <span className="w-10 h-10 rounded-full border-2 border-navy/20 flex items-center justify-center group-hover:border-teal group-hover:bg-teal transition-all duration-300">
@@ -936,8 +1046,8 @@ function QuoteSection() {
         >
           <Quote className="w-8 h-8 md:w-10 md:h-10 text-teal/30 mx-auto mb-8 md:mb-10" />
           <p className="font-display text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-navy leading-[1.3] tracking-tight mb-8 md:mb-10">
-            Non sei quello che ti è successo.<br />
-            <span className="text-teal italic">Sei quello che scegli di diventare.</span>
+            Ciò che hai vissuto non si cancella. Si trasforma.<br />
+            <span className="text-teal italic">Questa è la Grande Opera.</span>
           </p>
           <div className="flex items-center justify-center gap-5">
             <span className="w-10 h-px bg-teal/40" />
@@ -954,12 +1064,36 @@ function QuoteSection() {
 // PERCORSI SECTION - Interactive Grid
 // ============================================
 const percorsiItems = [
-  { title: 'Formazione identitaria', icon: Eye },
-  { title: 'Leadership e comunicazione', icon: Users },
-  { title: 'Consapevolezza professionale', icon: Brain },
-  { title: 'Appagamento personale', icon: Star },
-  { title: 'Cambiamento interiore', icon: Compass },
-  { title: 'Metaquantistica applicata', icon: Sparkles },
+  {
+    title: '4 Identità — 1 realtà',
+    desc: 'Scopriamo chi sei prima di creare ciò che vuoi',
+    icon: Eye,
+  },
+  {
+    title: 'Leadership Alpha',
+    desc: 'Guidi perché vieni riconosciuto — non perché imponi',
+    icon: Star,
+  },
+  {
+    title: 'Analisi del Comportamento',
+    desc: 'Vedi ciò che gli altri non vedono ancora',
+    icon: Brain,
+  },
+  {
+    title: 'Comunicazione e Negoziazione',
+    desc: 'Ogni relazione diventa un accordo. Ogni accordo, un risultato',
+    icon: Handshake,
+  },
+  {
+    title: 'Il Progetto Esclusivo',
+    desc: 'Il tuo canvas. Il tuo metodo. I tuoi obiettivi',
+    icon: Compass,
+  },
+  {
+    title: 'Flow → Inflow',
+    desc: 'Quando tutto si allinea — i risultati non sorprendono. Confermano',
+    icon: Sparkles,
+  },
 ]
 
 function PercorsiSection() {
@@ -967,37 +1101,40 @@ function PercorsiSection() {
     <section className="py-28 lg:py-36 bg-navy-dark overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 max-w-4xl mx-auto">
           <div className="flex items-center justify-center gap-4 mb-6">
             <span className="w-10 h-[2px] bg-gradient-to-r from-transparent to-teal-light/40" />
-            <span className="text-teal-light text-[13px] uppercase tracking-[0.2em] font-semibold">Cosa Possiamo Fare</span>
+            <span className="text-teal-light text-[13px] uppercase tracking-[0.2em] font-semibold">Cosa Posso Fare per Te</span>
             <span className="w-10 h-[2px] bg-gradient-to-l from-transparent to-teal-light/40" />
           </div>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-white mb-4">
-            Percorsi, seminari, corsi, eventi.
+          <h2 className="font-display text-2xl md:text-3xl lg:text-[44px] text-white mb-5 leading-tight">
+            Ricorda: Non esistono percorsi standard.{' '}
+            <span className="text-teal-light italic">Esiste il tuo.</span>
           </h2>
-          <p className="text-base md:text-lg text-white/70">
-            Metodi pratici per crescere, evolvere, trasformare.
+          <p className="text-base md:text-lg text-white/70 leading-relaxed">
+            <em>Ciò che va bene per tutti non funziona per nessuno.</em> Ogni percorso nasce da te e per te.
+            Dalla tua identità, dai tuoi obiettivi, dalla realtà che vivi.
           </p>
         </div>
 
-        {/* Cards Grid - Simple CSS */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
           {percorsiItems.map((item) => (
             <div
               key={item.title}
-              className="group p-5 md:p-6 lg:p-8 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-teal/30 transition-all duration-300 cursor-pointer"
+              className="group p-5 md:p-6 lg:p-7 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-teal/30 transition-all duration-300 cursor-pointer"
             >
               <item.icon className="w-6 h-6 md:w-8 md:h-8 text-teal-light mb-3 md:mb-4 group-hover:scale-110 transition-transform" />
-              <h3 className="text-white font-medium text-sm md:text-base">{item.title}</h3>
+              <h3 className="text-white font-semibold text-base md:text-lg mb-1.5 leading-tight">{item.title}</h3>
+              <p className="text-white/65 text-xs md:text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
 
         {/* CTA Button */}
         <div className="text-center mt-12">
-          <Link href="/percorsi" className="group inline-flex items-center gap-3 bg-teal text-white px-8 py-4 rounded-full font-medium shadow-lg shadow-teal/25 hover:shadow-xl hover:shadow-teal/35 hover:-translate-y-0.5 transition-all duration-300">
-            <span>Scopri i percorsi</span>
+          <Link href="/contatti" className="group inline-flex items-center gap-3 bg-teal text-white px-8 py-4 rounded-full font-medium shadow-lg shadow-teal/25 hover:shadow-xl hover:shadow-teal/35 hover:-translate-y-0.5 transition-all duration-300">
+            <span>Costruiamo il tuo percorso</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
         </div>
@@ -1099,10 +1236,21 @@ function PartnershipSection() {
 // ============================================
 // LIBRI SECTION - Editorial Style
 // ============================================
-const libri = [
-  { title: 'In-Flow', subtitle: 'Il metodo', image: '/images/book-inflow.jpg' },
-  { title: 'Oltre la diagnosi', subtitle: 'La mia storia', image: '/images/book-diagnosi.jpg' },
-  { title: 'La Guida alla Metaquantistica', subtitle: 'La scienza', image: '/images/book-metaquantistica.jpg' },
+interface Libro {
+  title: string
+  subtitle: string
+  image: string
+  comingSoon: boolean
+  missingImage?: boolean
+}
+const libri: Libro[] = [
+  { title: 'The Inflow Protocol', subtitle: 'Il metodo', image: '/images/books/inflow-protocol.png', comingSoon: true },
+  { title: 'Daily Flow', subtitle: 'Il diario', image: '/images/books/daily-flow.png', comingSoon: true },
+  { title: 'Oltre la diagnosi', subtitle: 'La mia storia', image: '/images/books/oltre-la-diagnosi.png', comingSoon: false },
+  { title: 'Il codice segreto della Legge di Attrazione', subtitle: 'La scienza', image: '/images/books/codice-segreto.png', comingSoon: false },
+  { title: 'Guida introduttiva alla Metaquantistica', subtitle: 'La scienza', image: '/images/book-metaquantistica.jpg', comingSoon: false },
+  { title: 'Doppiatore di te stesso vol.1', subtitle: 'La voce interiore', image: '', comingSoon: false, missingImage: true },
+  { title: 'Doppiatore di te stesso vol.2', subtitle: 'La voce interiore', image: '/images/books/doppiatore-vol2.png', comingSoon: false },
 ]
 
 function LibriSection() {
@@ -1138,35 +1286,64 @@ function LibriSection() {
           </motion.div>
         </motion.div>
 
+        {/* Carosello continuo auto-scroll */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
-          variants={stagger}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8"
+          transition={{ duration: 0.6 }}
+          className="relative"
         >
-          {libri.map((libro) => (
-            <motion.div
-              key={libro.title}
-              variants={fadeUp}
-              className="group cursor-pointer"
-            >
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-6 bg-white shadow-lg group-hover:shadow-2xl transition-shadow duration-500">
-                <Image
-                  src={libro.image}
-                  alt={libro.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                  quality={60}
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-cream to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-cream to-transparent z-10 pointer-events-none" />
+
+          <div
+            className="flex w-max items-stretch"
+            style={{ animation: 'scroll-left 60s linear infinite' }}
+          >
+            {[...libri, ...libri].map((libro, i) => (
+              <div
+                key={i}
+                className="group flex-shrink-0 w-[220px] md:w-[260px] mx-3 md:mx-4 cursor-pointer"
+              >
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-4 bg-white shadow-lg group-hover:shadow-2xl transition-shadow duration-500">
+                  {libro.missingImage ? (
+                    // Placeholder card — copertina non ancora disponibile
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 bg-gradient-to-br from-cream to-cream-dark/40 border-2 border-dashed border-navy/15">
+                      <ImageIcon className="w-9 h-9 text-navy/30 mb-3" />
+                      <p className="text-navy/60 text-[11px] uppercase tracking-[0.2em] font-bold mb-2">
+                        Copertina mancante
+                      </p>
+                      <p className="text-navy/50 text-xs leading-relaxed italic">
+                        Immagine non ancora disponibile
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <Image
+                        src={libro.image}
+                        alt={libro.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        sizes="260px"
+                        quality={60}
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </>
+                  )}
+                  {libro.comingSoon && (
+                    <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-coral text-white text-[10px] font-bold tracking-widest uppercase shadow-md">
+                      Coming Soon
+                    </span>
+                  )}
+                </div>
+                <p className="text-teal text-xs font-medium mb-1">{libro.subtitle}</p>
+                <h3 className="font-display text-lg text-navy group-hover:text-teal transition-colors leading-tight">{libro.title}</h3>
               </div>
-              <p className="text-teal text-sm font-medium mb-1">{libro.subtitle}</p>
-              <h3 className="font-display text-xl md:text-2xl text-navy group-hover:text-teal transition-colors">{libro.title}</h3>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </motion.div>
 
         {/* Coming Soon */}
@@ -1323,48 +1500,88 @@ function ContattiSection() {
               </div>
 
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-cream leading-[1.1] tracking-tight mb-8">
-                Vuoi lavorare<br />
-                <span className="text-teal-light italic">con me?</span>
+                Hai già deciso.<br />
+                <span className="text-teal-light italic">Forse non lo sai ancora.</span>
               </h2>
 
-              <div className="space-y-3 text-cream/60 text-base md:text-lg max-w-sm">
-                <p>Vuoi portarmi nella tua azienda?</p>
-                <p>Vuoi iniziare il tuo percorso identitario?</p>
+              <div className="space-y-3 text-cream/65 text-base md:text-lg max-w-md">
+                <p>Vuoi portare il <span className="text-teal-light font-medium">Metodo Alpha</span> nella tua azienda?</p>
+                <p>Vuoi costruire il tuo <span className="text-teal-light font-medium">percorso esclusivo</span> con me?</p>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Side - Teal Gradient with CTA */}
+          {/* Right Side - Teal Gradient con due opzioni */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="relative flex items-center justify-center px-6 md:px-16 lg:px-20 py-16 md:py-20 lg:py-28 bg-gradient-to-br from-teal to-teal-dark"
+            className="relative flex items-center justify-center px-6 md:px-12 lg:px-16 py-16 md:py-20 lg:py-24 bg-gradient-to-br from-teal to-teal-dark"
           >
-            {/* Decorative elements - hidden on mobile */}
             <div className="hidden md:block absolute top-10 right-10 w-16 h-16 rounded-full border border-cream/10" />
             <div className="hidden md:block absolute bottom-16 left-10 w-24 h-24 rounded-full border border-cream/5" />
 
-            <div className="relative text-center lg:text-left">
-              <p className="font-display text-3xl md:text-4xl lg:text-5xl text-cream leading-tight tracking-tight mb-8 md:mb-10">
-                Scrivimi.<br />
-                <span className="text-cream/80 font-serif italic">Sono qui.</span>
+            <div className="relative w-full max-w-md text-center lg:text-left">
+              {/* Opzione 1 — contatto diretto */}
+              <p className="font-display text-2xl md:text-3xl lg:text-4xl text-cream leading-tight tracking-tight mb-6">
+                Scrivimi.{' '}
+                <span className="text-cream/85 font-serif italic">Sono qui.</span>
               </p>
 
               <Link
                 href="/contatti"
-                className="group inline-flex items-center gap-4 md:gap-5 bg-white text-navy-dark px-7 md:px-9 py-4 md:py-5 rounded-full text-base md:text-lg font-semibold shadow-xl shadow-navy-dark/20 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300"
+                className="group inline-flex items-center gap-3 bg-white text-navy-dark px-6 md:px-7 py-3.5 md:py-4 rounded-full text-base font-semibold shadow-xl shadow-navy-dark/20 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300"
               >
                 <span>Contattami</span>
-                <span className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-navy-dark flex items-center justify-center group-hover:bg-teal-dark transition-colors duration-300">
-                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-cream group-hover:translate-x-0.5 transition-transform duration-300" />
+                <span className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-navy-dark flex items-center justify-center group-hover:bg-teal-dark transition-colors duration-300">
+                  <ArrowRight className="w-4 h-4 text-cream group-hover:translate-x-0.5 transition-transform duration-300" />
                 </span>
               </Link>
 
-              <p className="mt-8 md:mt-10 text-cream/60 text-sm tracking-wide">
-                Il primo passo verso la tua trasformazione
+              <p className="mt-4 mb-10 text-cream/65 text-sm font-serif italic">
+                Non esiste il momento giusto. Esiste adesso.
               </p>
+
+              {/* Divisore */}
+              <div className="flex items-center gap-4 my-8">
+                <span className="flex-1 h-px bg-cream/20" />
+                <span className="text-cream/50 text-xs uppercase tracking-widest">oppure</span>
+                <span className="flex-1 h-px bg-cream/20" />
+              </div>
+
+              {/* Opzione 2 — Alice */}
+              <div className="flex flex-col items-center lg:items-start">
+                <div className="relative w-20 h-20 rounded-full overflow-hidden ring-2 ring-cream/30 shadow-xl mb-4">
+                  <Image
+                    src="/images/alice/alice.png"
+                    alt="Alice — AI di Luca Pellicari"
+                    fill
+                    className="object-cover"
+                    sizes="80px"
+                  />
+                  <span className="absolute bottom-1 right-1 px-1.5 py-0.5 rounded-full bg-navy-dark text-cream text-[8px] font-bold tracking-widest uppercase">
+                    AI
+                  </span>
+                </div>
+                <p className="text-cream font-display text-lg md:text-xl mb-2 leading-tight">
+                  Sono Alice, l&apos;assistente personale virtuale di Luca. <span className="italic">Dimmi pure.</span>
+                </p>
+                <p className="text-cream/70 text-sm leading-relaxed mb-5">
+                  Parla liberamente con Alice. Può approfondire ogni argomento, inviarti materiale e fissare direttamente un incontro con me.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new CustomEvent('alice:open'))}
+                  className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-cream/40 text-cream text-sm font-semibold hover:bg-cream/10 hover:border-cream/70 transition-all duration-300"
+                >
+                  <span>Inizia la conversazione</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
+                </button>
+                <p className="mt-3 text-cream/55 text-xs font-serif italic">
+                  Disponibile 24/7.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -1377,16 +1594,19 @@ function ContattiSection() {
 // IDENTITY HIGHLIGHTS - Carousel Marquee
 // ============================================
 const identityTags = [
-  { text: '7 Rinascite', color: 'bg-teal/10 text-teal border-teal/20' },
-  { text: 'Paracadutista Militare', color: 'bg-navy/5 text-navy/80 border-navy/15' },
-  { text: 'Sopravvissuto al Cancro', color: 'bg-coral/10 text-coral border-coral/20' },
-  { text: 'Scienza & Spiritualità', color: 'bg-teal/10 text-teal-dark border-teal/20' },
-  { text: 'Portatore di Felicità', color: 'bg-coral/10 text-coral border-coral/20' },
-  { text: 'Ricchezza Condivisa', color: 'bg-teal/10 text-teal border-teal/20' },
-  { text: '30+ Anni di Esperienza', color: 'bg-navy/5 text-navy/80 border-navy/15' },
-  { text: 'Docente Universitario', color: 'bg-navy/5 text-navy/80 border-navy/15' },
-  { text: 'Fenice Cimbra', color: 'bg-coral/10 text-coral border-coral/20' },
-  { text: 'Metodo In-Flow', color: 'bg-teal/10 text-teal border-teal/20' },
+  { text: 'Le origini cimbre', color: 'bg-teal/10 text-teal border-teal/20' },
+  { text: 'La Famiglia', color: 'bg-navy/5 text-navy/80 border-navy/15' },
+  { text: 'La Cultura', color: 'bg-coral/10 text-coral border-coral/20' },
+  { text: 'Disciplina e Coraggio', color: 'bg-teal/10 text-teal-dark border-teal/20' },
+  { text: 'La Professione', color: 'bg-coral/10 text-coral border-coral/20' },
+  { text: 'Le Relazioni', color: 'bg-teal/10 text-teal border-teal/20' },
+  { text: 'La Meditazione', color: 'bg-navy/5 text-navy/80 border-navy/15' },
+  { text: 'L\u2019Impresa', color: 'bg-navy/5 text-navy/80 border-navy/15' },
+  { text: 'La Formazione', color: 'bg-coral/10 text-coral border-coral/20' },
+  { text: 'I Figli', color: 'bg-teal/10 text-teal border-teal/20' },
+  { text: 'L\u2019Impegno Sociale', color: 'bg-navy/5 text-navy/80 border-navy/15' },
+  { text: 'Il Metodo Alpha', color: 'bg-teal/10 text-teal border-teal/20' },
+  { text: 'La Rinascita', color: 'bg-coral/10 text-coral border-coral/20' },
 ]
 
 function IdentityHighlightsSection() {
@@ -1434,6 +1654,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <AliceHomepageSection />
+      <AlphaTeamSection />
       <OpeningSection />
       <IdentityHighlightsSection />
       <ChiSonoSection />
@@ -1443,10 +1664,10 @@ export default function HomePage() {
       <AlphakomSection />
       <QuoteSection />
       <PercorsiSection />
-      <PartnershipSection />
+      {/* PartnershipSection nascosta — da riattivare con 4-6 partner nominativi + logo (post-speech Atoma) */}
       <InFlowSection />
       <LibriSection />
-      <BlogSection />
+      {/* BlogSection nascosta — da riattivare quando ci sono articoli da pubblicare */}
       <ContattiSection />
     </>
   )

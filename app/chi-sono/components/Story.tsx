@@ -5,52 +5,95 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 
 const storyChapters = [
   {
-    title: 'Le Origini',
-    subtitle: 'L\'Infanzia e la Scuola',
+    year: 'XIV sec.',
+    tag: 'Le Origini',
+    title: 'Pellicari — i Pilecher',
+    content:
+      "Le radici della famiglia affondano nella Lessinia veronese, tra le comunità cimbre. Pilech: la betulla. Custodi, prima che artigiani.",
+  },
+  {
     year: '1963',
-    content: `Sono figlio unico, cresciuto in un bozzolo di amore e vulnerabilità. Ero sempre malato, non ho mai fatto l'asilo. Mio padre tornava ogni giorno con un piccolo regalo — un gesto che ancora oggi porto nel cuore. A cinque anni due interventi chirurgici cambiarono la mia salute. La scuola fu il primo grande salto: una suora meravigliosa, una calligrafia costruita a pennino e inchiostro, e un mondo che cominciava ad aprirsi.`,
+    tag: 'Nascita',
+    title: 'Un nuovo mondo. Il valore della famiglia.',
+    content:
+      "Figlio unico, cresciuto in un bozzolo di amore e vulnerabilità. Il calore della famiglia diventa la prima fondamenta.",
   },
   {
-    title: 'Il Liceo e la Frattura',
-    subtitle: 'La Prima Rinascita',
-    year: '1979',
-    content: `A 16 anni mi si spezza l'anca. Quarantasei giorni immobile, otto materie non classificate, tutto sembrava perduto. E invece quello è stato il mio primo vero salto identitario: mi sono rialzato con determinazione, ho recuperato l'anno e ho scoperto che avevo molta più forza di quanto credessi. La vita ti spezza solo fino a quando non le dimostri che sei più forte.`,
+    year: '1982',
+    tag: 'Liceo Scientifico',
+    title: 'Le basi formative. La prima scelta di vita.',
+    content:
+      "Lo studio come palestra del pensiero. Il primo «chi voglio essere» — costruito a mano, con disciplina.",
   },
   {
-    title: 'Il Paracadutista',
-    subtitle: 'Secondo Salto Quantico',
     year: '1983',
-    content: `Il 3 marzo 1983 — 3/3/83 — numerologicamente un portale. Divento paracadutista militare. Ho imparato la disciplina, la libertà dentro le regole, la forza del team, la bellezza del sacrificio. Sono quasi morto due volte: un colpo di vela che quasi mi strappa un orecchio e un malfunzionamento del paracadute al quarto lancio. Non ho mai avuto paura della morte. Perché la morte, per me, è solo una tuta in pelle che si lascia in un armadio.`,
+    tag: 'BAO — XIII GRACO',
+    title: 'Disciplina e coraggio. Nasce la Comunicazione Alpha.',
+    content:
+      "Il 3/3/83 divento paracadutista militare. Imparo la libertà dentro le regole, la forza del team. Due volte sfioro la morte: non ho mai avuto paura.",
   },
   {
-    title: 'La Morte e la Rinascita',
-    subtitle: 'Terzo Salto Quantico',
+    year: '1987',
+    tag: 'RAS / Allianz',
+    title: 'La comunicazione diventa professione.',
+    content:
+      "Agente Generale. Le relazioni smettono di essere intuizione e diventano metodo. Il mercato è la prima vera scuola.",
+  },
+  {
+    year: '1988',
+    tag: 'Impresa & Politica',
+    title: 'Alpha diventa strumento di vita.',
+    content:
+      "Esperienza di impresa e impegno politico. Il metodo Alpha si forma a contatto con persone, decisioni, responsabilità.",
+  },
+  {
     year: '1993',
-    content: `Linfoma non Hodgkin. Sei mesi di vita. Avevo trent'anni. Io non ho avuto paura. Mai. La paura collassa l'onda dell'evento temuto. E io ho sempre scelto la vita. Ho scoperto la meditazione trascendentale, ho incontrato medici ayurvedici straordinari, ho imparato ad ascoltare il mio corpo, a lasciar andare il controllo, a negoziare con il destino. Trentadue anni dopo, sono ancora qui.`,
+    tag: 'La Seconda Rinascita',
+    title: 'Cancro e Meditazione Trascendentale.',
+    content:
+      "Linfoma non Hodgkin, sei mesi di vita. Trent'anni dopo, sono ancora qui. La meditazione trascendentale apre una nuova dimensione.",
   },
   {
-    title: "L'Errore d'Oro",
-    subtitle: 'Quarto Salto Quantico',
     year: '1996',
-    content: `Dopo la guarigione faccio la cosa più folle: apro un'azienda che produce scatole di cartone — quando sono allergico alla carta. Sette anni di sacrifici, debiti, lacrime, notti senza dormire. Ma ho pagato tutto fino all'ultima lira. Per rispetto del mio nome e della mia famiglia. È stato l'errore più grande della mia vita. Ed è stato anche uno dei più grandi insegnamenti.`,
+    tag: 'La Prima Azienda',
+    title: "Un'esperienza da dimenticare.",
+    content:
+      "Apro un'azienda che produce scatole di cartone — io, allergico alla carta. Sette anni di sacrifici, debiti, lezioni. Pago tutto fino all'ultima lira.",
   },
   {
-    title: 'La Famiglia che Ho Scelto',
-    subtitle: 'Quinto Salto Quantico',
     year: '2002',
-    content: `Incontro Davide Possi, Filomena e Rita Cossu. Entro in Pyramis in 27 mq. Oggi l'azienda ha superato i 1.100 collaboratori e sfiora i 100 milioni di fatturato. Non ero un bravo venditore. Eppure ho scoperto la mia vera skill: la gestione delle relazioni. Oggi l'80% del fatturato Vodafone Italia, all'interno di Pyramis, nasce dalla gestione dei clienti. Il mio talento: non perdere le persone.`,
+    tag: 'Piramis Group',
+    title: 'La comunicazione Alpha diventa professione.',
+    content:
+      "Incontro Davide Possi, Filomena e Rita Cossu. Da 27 mq a 1.100 collaboratori e quasi 100 milioni di fatturato. La mia vera skill: la gestione delle relazioni.",
   },
   {
-    title: "L'Entanglement Sacro",
-    subtitle: 'Sesto Salto Quantico',
-    year: '2010',
-    content: `Lucia Facchinetti entra nella mia vita. Anima, sorella, madre, figlia, compagna di destino. Insieme fondiamo Quantum Academy. Poi arriva Alberto Lori, narratore RAI, voce storica dell'Italia, il mio fratello maggiore. Io, Lucia e Alberto abbiamo un legame quantistico. Pensiamo le stesse cose a chilometri di distanza. Siamo un trio. Un'unità. Una missione.`,
+    year: '2006',
+    tag: 'La Terza Rinascita',
+    title: 'La nuova famiglia. La gioia e il dolore.',
+    content:
+      "La famiglia si ricompone su un piano nuovo. Gioia e dolore si intrecciano. La terza rinascita non è fisica: è di senso.",
   },
   {
-    title: 'Quantum Academy e Alphakom',
-    subtitle: 'Settimo Salto Quantico',
-    year: '2015',
-    content: `Quantum Academy nasce come contenitore per altri formatori. Ma dopo dieci anni capisco la verità: non era nata per loro. Era nata per me, Lucia e Alberto. Era nata per diventare una Scuola di Identità e Consapevolezza. E poi lancio Alphakom — la Scuola degli Alpha Leaders. La leadership, la comunicazione, l'identità professionale: tutto converge nel Metodo In-Flow.`,
+    year: '2013',
+    tag: 'Quantum Academy',
+    title: 'La passione diventa professione.',
+    content:
+      "Nasce Quantum Academy con Lucia Facchinetti e Alberto Lori. Un'idea, tre vite, una missione comune. La scuola che non sapevo di sognare.",
+  },
+  {
+    year: '2020',
+    tag: 'AlphaKom — In-Flow Protocol',
+    title: 'Nasce il Metodo Alpha.',
+    content:
+      "AlphaKom prende forma come framework operativo. The In-Flow Protocol diventa il sistema completo: Flow che genera Inflow.",
+  },
+  {
+    year: '2026',
+    tag: 'La Quarta Rinascita',
+    title: 'Una nuova sfida: Ictus.',
+    content:
+      "Una nuova sfida fisica. Il punto di massimo Inflow: ciò che hai vissuto non si cancella, si trasforma. Questa è la Grande Opera.",
   },
 ]
 
@@ -64,7 +107,11 @@ export function Story() {
   const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ['0%', '100%'])
 
   return (
-    <section ref={containerRef} className="py-24 lg:py-32 bg-gradient-to-b from-navy-dark via-navy to-navy-dark relative overflow-hidden">
+    <section
+      id="story"
+      ref={containerRef}
+      className="py-24 lg:py-32 bg-gradient-to-b from-navy-dark via-navy to-navy-dark relative overflow-hidden"
+    >
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-teal/5 rounded-full blur-3xl" />
@@ -74,9 +121,9 @@ export function Story() {
 
       <div className="container-custom relative z-10">
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-20 max-w-3xl mx-auto">
           <motion.span
-            className="inline-block text-teal text-sm font-medium uppercase tracking-[0.3em] mb-4"
+            className="inline-block text-teal-light text-sm font-medium uppercase tracking-[0.3em] mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -85,30 +132,43 @@ export function Story() {
             La Mia Storia
           </motion.span>
           <motion.h2
-            className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-[1.1]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Sette Salti{' '}
-            <span className="bg-gradient-to-r from-teal via-teal-light to-coral bg-clip-text text-transparent">
-              Quantici
+            La mia{' '}
+            <span className="bg-gradient-to-r from-teal-light via-coral to-teal-light bg-clip-text text-transparent italic">
+              LIFELINE
             </span>
           </motion.h2>
           <motion.p
-            className="text-white/70 text-lg max-w-2xl mx-auto"
+            className="font-serif italic text-xl md:text-2xl text-cream/85 mb-6 leading-snug"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            Questa è la mia vita. Lei insegna, io ascolto.
+          </motion.p>
+          <motion.div
+            className="space-y-3 text-cream/70 text-base md:text-lg leading-[1.75]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Ogni caduta è stata un salto verso chi sono oggi.
-            Questa è la storia di sette trasformazioni che mi hanno reso l'uomo che sono.
-          </motion.p>
+            <p>Alcune tappe le ho scelte, altre no. Ma sempre ho scelto cosa farne.</p>
+            <p>
+              <strong className="text-teal-light">Tredici passaggi</strong> che insegnano, che trasformano — ognuno ha lasciato
+              qualcosa: una cicatrice, un amore, un dolore, una nuova idea. Un&apos;esperienza.
+            </p>
+            <p className="italic">Quello che leggi qui sotto non è una biografia. È una mappa.</p>
+          </motion.div>
         </div>
 
-        {/* Steps Timeline */}
+        {/* Lifeline Timeline — 13 punti */}
         <div className="max-w-5xl mx-auto relative">
           {/* Animated Progress Line */}
           <div className="absolute left-[28px] lg:left-1/2 lg:-translate-x-px top-0 bottom-0 w-[2px] bg-white/10">
@@ -122,8 +182,8 @@ export function Story() {
           <div className="space-y-8 lg:space-y-0">
             {storyChapters.map((chapter, index) => (
               <motion.div
-                key={chapter.year}
-                className={`relative flex flex-col lg:flex-row items-start gap-6 lg:gap-12 lg:min-h-[280px] ${
+                key={`${chapter.year}-${index}`}
+                className={`relative flex flex-col lg:flex-row items-start gap-6 lg:gap-12 lg:min-h-[220px] ${
                   index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
                 }`}
                 initial={{ opacity: 0, y: 50 }}
@@ -132,19 +192,16 @@ export function Story() {
                 transition={{
                   duration: 0.7,
                   delay: 0.1,
-                  ease: [0.22, 1, 0.36, 1] as const
+                  ease: [0.22, 1, 0.36, 1] as const,
                 }}
               >
                 {/* Step Number Circle */}
                 <div className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 z-20">
                   <div className="relative group">
-                    {/* Outer glow ring */}
                     <div className="absolute inset-0 w-14 h-14 rounded-full bg-gradient-to-br from-teal to-coral opacity-50 blur-md group-hover:opacity-80 transition-opacity duration-500" />
-
-                    {/* Main circle */}
                     <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-teal to-teal-dark flex items-center justify-center border-4 border-navy-dark shadow-2xl">
-                      <span className="font-serif text-xl font-bold text-white">
-                        {index + 1}
+                      <span className="font-display text-base font-bold text-white">
+                        {String(index + 1).padStart(2, '0')}
                       </span>
                     </div>
                   </div>
@@ -153,12 +210,8 @@ export function Story() {
                 {/* Content Card */}
                 <div className={`flex-1 pl-20 lg:pl-0 ${index % 2 === 0 ? 'lg:pr-20' : 'lg:pl-20'}`}>
                   <div className="group relative h-full">
-                    {/* Card background glow */}
                     <div className="absolute -inset-1 bg-gradient-to-r from-teal/20 via-coral/10 to-teal/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-                    {/* Main card - Fixed height for uniformity */}
-                    <div className="relative h-full min-h-[220px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 lg:p-8 hover:border-teal/30 transition-all duration-500 hover:bg-white/[0.08] flex flex-col">
-                      {/* Year badge */}
+                    <div className="relative h-full min-h-[200px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 lg:p-7 hover:border-teal/30 transition-all duration-500 hover:bg-white/[0.08] flex flex-col">
                       <div className="inline-flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-coral animate-pulse" />
                         <span className="text-coral font-mono text-sm font-semibold tracking-wider">
@@ -166,29 +219,24 @@ export function Story() {
                         </span>
                       </div>
 
-                      {/* Subtitle */}
-                      <p className="text-teal text-xs uppercase tracking-[0.2em] font-medium mb-2">
-                        {chapter.subtitle}
+                      <p className="text-teal-light text-[11px] uppercase tracking-[0.2em] font-bold mb-2">
+                        {chapter.tag}
                       </p>
 
-                      {/* Title */}
-                      <h3 className="font-serif text-xl lg:text-2xl font-bold text-white mb-3 group-hover:text-teal-light transition-colors duration-300">
+                      <h3 className="font-display text-lg lg:text-xl font-bold text-white mb-3 group-hover:text-teal-light transition-colors duration-300 leading-tight">
                         {chapter.title}
                       </h3>
 
-                      {/* Content */}
-                      <p className="text-white/70 leading-relaxed text-sm lg:text-base flex-grow">
+                      <p className="text-white/70 leading-relaxed text-sm flex-grow">
                         {chapter.content}
                       </p>
 
-                      {/* Decorative corner */}
                       <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-teal/20 rounded-tr-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-coral/20 rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
                   </div>
                 </div>
 
-                {/* Empty space for alternating layout on desktop */}
                 <div className="hidden lg:block flex-1" />
               </motion.div>
             ))}
@@ -212,35 +260,57 @@ export function Story() {
           </motion.div>
         </div>
 
-        {/* Chi Sono Oggi - Closing */}
+        {/* CHI SONO OGGI — Surgo ex clade + Anafore + Poesia Cimbra */}
         <motion.div
-          className="mt-20 max-w-3xl mx-auto"
+          className="mt-28 max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-10">
-            <span className="text-teal text-sm font-medium uppercase tracking-[0.3em]">Chi Sono Oggi</span>
+            <span className="text-teal-light text-sm font-medium uppercase tracking-[0.3em]">Chi sono oggi</span>
+            <h3 className="font-display italic text-3xl md:text-4xl lg:text-5xl text-cream mt-4 leading-tight">
+              Surgo ex clade.
+            </h3>
           </div>
-          <div className="space-y-2 text-center">
+
+          {/* Anafore */}
+          <div className="space-y-2.5 text-center mb-14">
             {[
-              'Sono un uomo realizzato e in cammino.',
-              'Sono compagno di viaggio di Lucia e Alberto.',
-              'Sono fondatore di Quantum Academy.',
-              'Sono creatore di Alphakom.',
-              'Sono autore, speaker, narratore, formatore.',
-              'Sono un portatore sano di felicità.',
-              'Sono una fenice cimbra rinata sette volte.',
+              'Sono un uomo che ha vissuto molte vite.',
+              'Il mio simbolo è la fenice che risorge dai propri errori.',
+              'Trasformo le paure in coraggio, ogni giorno.',
+              'Mi definisco un guerriero, ma amo la pace.',
+              'Combatto solo con me stesso e non vinco sempre.',
+              "Cerco nella scienza le ragioni dell'esperienza.",
+              'Condivido ciò che imparo, dono ciò che sono.',
             ].map((line, i) => (
-              <p key={i} className="font-serif text-lg md:text-xl text-white/80 leading-relaxed">{line}</p>
+              <p key={i} className="font-serif text-lg md:text-xl text-cream/85 leading-[1.7]">
+                {line}
+              </p>
             ))}
           </div>
-          <div className="text-center mt-8 pt-8 border-t border-white/10">
-            <p className="font-serif text-xl lg:text-2xl text-white/90 italic">
-              &ldquo;Sono ciò che ho vissuto. Sono ciò che dono. Sono ciò che amo.&rdquo;
+
+          {/* Poesia Cimbra */}
+          <div className="relative pl-6 border-l-2 border-gold/40 mb-14 max-w-md mx-auto">
+            <p className="font-serif italic text-gold text-base md:text-lg leading-[1.9]">
+              «Il bosco è la casa del Cimbro,<br />
+              il tetto è il cielo,<br />
+              le finestre gli spazi tra le foglie<br />
+              e le porte…<br />
+              le ha rubate il vento»
             </p>
-            <p className="text-teal mt-4 font-medium">— Luca Pellicari</p>
+            <p className="text-cream/55 text-xs mt-3 uppercase tracking-widest">— Antica poesia Cimbra</p>
+          </div>
+
+          {/* Quote LP */}
+          <div className="text-center pt-8 border-t border-white/10">
+            <p className="font-serif text-xl lg:text-2xl text-cream/95 italic leading-relaxed">
+              &laquo;Ogni volta che cado, mi rialzo più forte. Non perché sono speciale. Perché ho imparato che cadere è
+              l&apos;unico modo per scoprire quanto in alto puoi arrivare.&raquo;
+            </p>
+            <p className="text-teal-light mt-4 font-medium tracking-wide">— Luca Pellicari</p>
           </div>
         </motion.div>
       </div>

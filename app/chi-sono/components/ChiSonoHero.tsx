@@ -27,62 +27,113 @@ export function ChiSonoHero() {
             </motion.span>
 
             <motion.h1
-              className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-navy mb-8 leading-tight"
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-navy-dark mb-4 leading-[1.1]"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Siediti un attimo.{' '}
-              <span className="bg-gradient-to-r from-teal via-teal-light to-teal-dark bg-clip-text text-transparent">
-                Questa è la parte che non racconto mai in pubblico.
-              </span>
+              Io sono Luca Pellicari.
             </motion.h1>
 
             <motion.p
-              className="text-xl text-navy/80 leading-relaxed mb-6"
+              className="font-display text-2xl md:text-3xl lg:text-4xl text-teal italic mb-10 leading-[1.25]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              Non sono qui per motivarti. Sono qui per aiutarti a diventare ciò che già sei.
+            </motion.p>
+
+            <motion.p
+              className="text-lg text-navy/75 leading-[1.75] mb-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Mi chiamo <strong className="text-teal">Luca Pellicari</strong> e la verità è che non ho mai vissuto una vita normale.
-              La mia storia non è lineare, non è comoda, non è protetta.
+              Immaginati al tavolo di un bar. Io davanti a te, un caffè tra le mani.
+              È così che mi piace presentarmi — <span className="text-teal font-semibold">senza palco, senza distanza</span>.
             </motion.p>
 
             <motion.p
-              className="text-xl text-navy/80 leading-relaxed mb-6"
+              className="text-lg text-navy/75 leading-[1.75] mb-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              È un percorso fatto di <strong className="text-teal">sette rinascite</strong>, di scelte coraggiose,
-              di cadute violentissime e di risalite verticali.
+              Ho vissuto molto. La disciplina militare. La malattia. Le sconfitte in impresa.
+              Le rinascite. Ogni caduta mi ha tolto qualcosa.
+              Ogni rinascita mi ha restituito qualcosa di più grande.
+              Quello che hai davanti oggi è il risultato di tutto questo.
             </motion.p>
 
             <motion.p
-              className="text-lg text-navy/70 leading-relaxed mb-6"
+              className="text-lg text-navy/75 leading-[1.75] mb-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Io non sono un formatore. Non sono un motivatore. Non sono un guru.
-              Sono un uomo che ha attraversato i propri inferi personali e ha scelto di tornare indietro con qualcosa da donare.
+              Ricordi? &laquo;Chi non sa fare insegna&raquo; — Io non insegno:{' '}
+              <span className="font-bold uppercase text-teal">CONDIVIDO</span>.
+              Perché ho vissuto in prima persona tutto ciò di cui parlo.
             </motion.p>
 
             <motion.p
-              className="text-base text-navy/60 leading-relaxed"
+              className="text-base text-navy/65 leading-[1.75] mb-10 italic"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              Il racconto che non trovi nei libri, né nei corsi. Solo qui, solo tra me e te.
-              E se sei arrivato fin qui, forse significa solo una cosa:
-              che una parte della mia storia parla anche di te.
+              E se sei arrivato fin qui, forse è perché lo hai già capito. Forse una parte della mia storia parla anche di te.
+              Continua a leggere. O parla con Alice — abbiamo molto da dirti.
             </motion.p>
+
+            {/* Badge credenziali */}
+            <motion.div
+              className="flex flex-wrap gap-2.5 mb-10"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.55 }}
+            >
+              {[
+                { text: 'Fondatore AlphaKom & Quantum Academy', accent: true },
+                { text: 'Autore', accent: false },
+                { text: 'Docente Universitario', accent: false },
+                { text: 'Ricercatore', accent: false },
+                { text: 'Analista del Comportamento', accent: false },
+              ].map((badge) => (
+                <span
+                  key={badge.text}
+                  className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[12px] font-semibold tracking-wide ${
+                    badge.accent
+                      ? 'bg-teal/10 border border-teal/20 text-teal'
+                      : 'bg-navy/[0.03] border border-navy/10 text-navy/70'
+                  }`}
+                >
+                  {badge.accent && <span className="w-1.5 h-1.5 rounded-full bg-teal/60" />}
+                  {badge.text}
+                </span>
+              ))}
+            </motion.div>
+
+            {/* CTA */}
+            <motion.a
+              href="#story"
+              className="group inline-flex items-center gap-3 bg-teal text-white px-7 py-3.5 rounded-full font-semibold shadow-lg shadow-teal/25 hover:shadow-xl hover:shadow-teal/35 hover:-translate-y-0.5 transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              <span>Scopri la mia storia</span>
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </motion.a>
           </div>
 
           {/* Image */}
@@ -93,20 +144,20 @@ export function ChiSonoHero() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-navy/15">
               <Image
                 src="/images/luca-portrait-2.jpg"
-                alt="Luca Pellicari - Identity Coach e Fondatore di Quantum Academy"
+                alt="Luca Pellicari - Fondatore AlphaKom & Quantum Academy"
                 fill
                 className="object-cover"
                 priority
                 quality={75}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/55 via-transparent to-transparent" />
             </div>
 
-            {/* Quote card */}
+            {/* Quote card — motto LP */}
             <motion.div
               className="absolute -bottom-6 -left-6 bg-gradient-to-br from-teal to-teal-dark text-white p-6 rounded-2xl max-w-xs shadow-2xl"
               initial={{ opacity: 0, x: -20, y: 20 }}
@@ -116,9 +167,9 @@ export function ChiSonoHero() {
             >
               <div className="w-8 h-1 bg-white/50 rounded mb-4" />
               <p className="font-serif text-lg italic leading-relaxed">
-                "Trasformare identità, liberare visioni, generare verità, creare ricchezza condivisa."
+                &laquo;Rispetta ciò che sei. Offri ciò che sai. Ottieni ciò che vuoi.&raquo;
               </p>
-              <p className="text-white/70 mt-3 text-sm font-medium">— La mia missione</p>
+              <p className="text-white/70 mt-3 text-sm font-medium">— Luca Pellicari</p>
             </motion.div>
 
             {/* Decorative corner */}

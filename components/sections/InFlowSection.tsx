@@ -30,9 +30,9 @@ export function InFlowSection() {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={stagger}
-          className="text-center mb-10 md:mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-3 mb-3 md:mb-6">
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-3 mb-4 md:mb-6">
             <span className="w-10 h-px bg-teal/50" />
             <span className="px-4 py-1.5 bg-teal/10 rounded-full text-teal text-xs uppercase tracking-[0.2em] font-medium">
               Il Mio Metodo
@@ -42,127 +42,113 @@ export function InFlowSection() {
 
           <motion.h2
             variants={fadeUp}
-            className="font-display text-5xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-navy via-teal to-navy mb-2 md:mb-4"
+            className="font-display text-4xl md:text-6xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-navy via-teal to-navy mb-4 md:mb-5 leading-tight"
           >
-            In-Flow
+            The Inflow Protocol
           </motion.h2>
 
           <motion.p
             variants={fadeUp}
-            className="font-serif text-lg md:text-2xl text-navy/70 italic max-w-xl mx-auto"
+            className="font-serif text-lg md:text-2xl text-navy/75 italic max-w-2xl mx-auto leading-relaxed"
           >
-            La scienza dell&apos;identità, la bellezza della verità.
+            Due libri in uno. Un manuale operativo e un romanzo. Perché la trasformazione vera non si spiega — si vive.
           </motion.p>
         </motion.div>
 
-        {/* Content Grid */}
+        {/* Body copy + sigillo */}
         <motion.div
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={stagger}
-          className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start"
+          className="max-w-3xl mx-auto text-center mb-14 md:mb-20"
         >
+          <motion.p variants={fadeUp} className="text-navy/75 text-lg md:text-xl leading-[1.8] mb-10">
+            Non è un libro di formazione. È un sistema.{' '}
+            <span className="font-semibold text-navy">Keelin O&apos;Connell</span> lo vive nelle pagine del romanzo.
+            Tu lo applichi nel manuale. E i risultati arrivano nella tua vita reale.
+          </motion.p>
 
-          {/* Left - Text Content */}
-          <div>
-            <motion.p variants={fadeUp} className="text-navy/60 text-lg mb-8">
-              Ogni persona può entrare nel suo{' '}
-              <span className="text-teal font-semibold">stato naturale</span>:
-            </motion.p>
+          <motion.blockquote
+            variants={fadeUp}
+            className="relative px-6 py-8 md:py-10 rounded-2xl bg-gradient-to-br from-teal/[0.06] to-teal/[0.02] border border-teal/15"
+          >
+            <p className="font-serif italic text-xl md:text-2xl text-navy leading-[1.6]">
+              &ldquo;Il <span className="text-teal font-semibold not-italic">Flow</span> non è &lsquo;fortuna&rsquo;.
+              È uno stato che si costruisce. <span className="text-teal font-semibold not-italic">In-Flow</span> è ciò
+              che generi quando smetti di lottare e inizi a vivere chi sei. Limiti e talenti.&rdquo;
+            </p>
+          </motion.blockquote>
+        </motion.div>
 
-            <motion.div variants={stagger} className="space-y-5 mb-10">
-              <motion.div variants={fadeUp} className="flex items-start gap-4 p-4 rounded-xl bg-white shadow-sm border border-gray-100">
-                <span className="w-2 h-2 rounded-full bg-teal mt-2 flex-shrink-0" />
-                <p className="text-navy text-lg">
-                  un equilibrio tra <span className="font-semibold">chi sei</span> e <span className="font-semibold">ciò che fai</span>
-                </p>
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="flex items-start gap-4 p-4 rounded-xl bg-white shadow-sm border border-gray-100">
-                <span className="w-2 h-2 rounded-full bg-coral mt-2 flex-shrink-0" />
-                <p className="text-navy text-lg">
-                  tra la tua <span className="font-semibold">storia</span> e il tuo <span className="font-semibold">futuro</span>
-                </p>
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="flex items-start gap-4 p-4 rounded-xl bg-white shadow-sm border border-gray-100">
-                <span className="w-2 h-2 rounded-full bg-teal mt-2 flex-shrink-0" />
-                <p className="text-navy text-lg">
-                  tra il tuo <span className="font-semibold">cuore</span> e la tua <span className="font-semibold">visione</span>
-                </p>
-              </motion.div>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="pl-5 border-l-2 border-teal/40">
-              <p className="text-navy/80 text-lg">
-                Il metodo In-Flow è il risultato di{' '}
-                <span className="text-teal font-semibold">una vita intera</span>.
+        {/* Cards */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={stagger}
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mb-14"
+        >
+          {/* Card 1 — Il libro */}
+          <motion.div variants={fadeUp}>
+            <Link
+              href="/libri"
+              className="group flex flex-col h-full p-7 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:border-teal/30 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <div className="w-14 h-14 rounded-xl bg-navy/5 flex items-center justify-center mb-6 group-hover:bg-navy group-hover:scale-105 transition-all duration-300">
+                <BookOpen className="w-7 h-7 text-navy group-hover:text-white transition-colors" />
+              </div>
+              <h4 className="text-2xl font-display text-navy mb-2">Il libro</h4>
+              <p className="text-navy/70 text-sm leading-relaxed">
+                Due percorsi paralleli. Una sola trasformazione.
               </p>
-            </motion.div>
-          </div>
+            </Link>
+          </motion.div>
 
-          {/* Right - Cards (hidden on mobile) */}
-          <motion.div variants={stagger} className="hidden lg:block space-y-4">
-            <motion.div variants={fadeUp}>
-              <Link
-                href="/libri"
-                className="group flex items-center gap-5 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:border-teal/30 transition-all duration-300"
-              >
-                <div className="w-14 h-14 rounded-xl bg-navy/5 flex items-center justify-center group-hover:bg-navy group-hover:scale-105 transition-all duration-300">
-                  <BookOpen className="w-7 h-7 text-navy group-hover:text-white transition-colors" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-xl font-display text-navy mb-1">Un libro</h4>
-                  <p className="text-navy/70 text-sm">Scopri di più →</p>
-                </div>
-              </Link>
-            </motion.div>
+          {/* Card 2 — Il Daily Flow */}
+          <motion.div variants={fadeUp}>
+            <Link
+              href="/libri"
+              className="group flex flex-col h-full p-7 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:border-coral/30 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <div className="w-14 h-14 rounded-xl bg-coral/10 flex items-center justify-center mb-6 group-hover:bg-coral group-hover:scale-105 transition-all duration-300">
+                <GraduationCap className="w-7 h-7 text-coral group-hover:text-white transition-colors" />
+              </div>
+              <h4 className="text-2xl font-display text-navy mb-2">Il Daily Flow</h4>
+              <p className="text-navy/70 text-sm leading-relaxed">
+                Il tuo diario personale del flusso. Gratis. Concreto.
+              </p>
+            </Link>
+          </motion.div>
 
-            <motion.div variants={fadeUp}>
-              <Link
-                href="/quantum-academy"
-                className="group flex items-center gap-5 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:border-coral/30 transition-all duration-300"
-              >
-                <div className="w-14 h-14 rounded-xl bg-coral/10 flex items-center justify-center group-hover:bg-coral group-hover:scale-105 transition-all duration-300">
-                  <GraduationCap className="w-7 h-7 text-coral group-hover:text-white transition-colors" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-xl font-display text-navy mb-1">Un corso</h4>
-                  <p className="text-navy/70 text-sm">Scopri di più →</p>
-                </div>
-              </Link>
-            </motion.div>
-
-            <motion.div variants={fadeUp}>
-              <Link
-                href="/contatti"
-                className="group flex items-center gap-5 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:border-teal/30 transition-all duration-300"
-              >
-                <div className="w-14 h-14 rounded-xl bg-teal/10 flex items-center justify-center group-hover:bg-teal group-hover:scale-105 transition-all duration-300">
-                  <Route className="w-7 h-7 text-teal group-hover:text-white transition-colors" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-xl font-display text-navy mb-1">Un percorso</h4>
-                  <p className="text-navy/70 text-sm">Scopri di più →</p>
-                </div>
-              </Link>
-            </motion.div>
+          {/* Card 3 — Il percorso */}
+          <motion.div variants={fadeUp}>
+            <Link
+              href="/percorsi"
+              className="group flex flex-col h-full p-7 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:border-teal/30 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <div className="w-14 h-14 rounded-xl bg-teal/10 flex items-center justify-center mb-6 group-hover:bg-teal group-hover:scale-105 transition-all duration-300">
+                <Route className="w-7 h-7 text-teal group-hover:text-white transition-colors" />
+              </div>
+              <h4 className="text-2xl font-display text-navy mb-2">Il percorso</h4>
+              <p className="text-navy/70 text-sm leading-relaxed">
+                Dall&apos;Inflow Protocol al Metodo AlphaKom — con me.
+              </p>
+            </Link>
           </motion.div>
         </motion.div>
 
-        {/* CTA */}
+        {/* CTA principale */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-16"
+          className="text-center"
         >
           <Link
             href="/metodo-in-flow"
-            className="group inline-flex items-center gap-3 bg-gradient-to-r from-teal to-teal-dark text-white px-8 py-4 rounded-full text-lg font-medium shadow-lg shadow-teal/25 hover:shadow-xl hover:shadow-teal/35 hover:scale-[1.02] transition-all duration-300"
+            className="group inline-flex items-center gap-3 bg-gradient-to-r from-teal to-teal-dark text-white px-9 md:px-11 py-5 md:py-6 rounded-full text-lg md:text-xl font-semibold shadow-xl shadow-teal/30 hover:shadow-2xl hover:shadow-teal/45 hover:scale-[1.02] transition-all duration-300"
           >
-            <span>Scopri In-Flow</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <span>Entra nel Flow. Adesso.</span>
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
       </div>
