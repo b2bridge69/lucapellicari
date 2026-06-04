@@ -1249,7 +1249,7 @@ const libri: Libro[] = [
   { title: 'Oltre la diagnosi', subtitle: 'La mia storia', image: '/images/books/oltre-la-diagnosi.png', comingSoon: false },
   { title: 'Il codice segreto della Legge di Attrazione', subtitle: 'La scienza', image: '/images/books/codice-segreto.png', comingSoon: false },
   { title: 'Guida introduttiva alla Metaquantistica', subtitle: 'La scienza', image: '/images/book-metaquantistica.jpg', comingSoon: false },
-  { title: 'Doppiatore di te stesso vol.1', subtitle: 'La voce interiore', image: '', comingSoon: false, missingImage: true },
+  { title: 'Doppiatore di te stesso vol.1', subtitle: 'La voce interiore', image: '/images/books/doppiatore-vol1.png', comingSoon: false },
   { title: 'Doppiatore di te stesso vol.2', subtitle: 'La voce interiore', image: '/images/books/doppiatore-vol2.png', comingSoon: false },
 ]
 

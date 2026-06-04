@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -134,15 +135,15 @@ export function Header() {
               className="relative z-10 group flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded-sm"
             >
               <div className="flex items-center gap-3">
-                <div
-                  className={cn(
-                    "w-9 h-9 rounded-lg flex items-center justify-center font-display text-[13px] font-bold tracking-tight transition-all duration-300",
-                    hasDarkBg || isMobileMenuOpen
-                      ? "bg-white/15 text-white backdrop-blur-sm border border-white/10"
-                      : "bg-navy text-white group-hover:bg-teal"
-                  )}
-                >
-                  LP
+                <div className="relative w-10 h-10 md:w-11 md:h-11 transition-transform duration-300 group-hover:scale-105">
+                  <Image
+                    src="/images/logo-pellicari.png"
+                    alt="Logo Pellicari"
+                    fill
+                    sizes="44px"
+                    className="object-contain"
+                    priority
+                  />
                 </div>
                 <div className="hidden sm:flex flex-col">
                   <span
@@ -159,7 +160,7 @@ export function Header() {
                       hasDarkBg || isMobileMenuOpen ? "text-white/60" : "text-navy/50"
                     )}
                   >
-                    Identity Coach
+                    Comunicazione Alpha
                   </span>
                 </div>
               </div>
