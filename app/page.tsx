@@ -8,6 +8,7 @@ import { ArrowRight, ChevronRight, ChevronLeft, Target, Eye, Shield, Users, Brai
 import { InFlowSection } from '@/components/sections/InFlowSection'
 import { AlphaTeamSection } from '@/components/sections/AlphaTeamSection'
 import { AliceHomepageSection } from '@/components/alice/AliceHomepageSection'
+import { ALICE_CONFIG } from '@/lib/alice-config'
 
 // Animation variants - optimized for performance
 const fadeUp = {
@@ -1044,7 +1045,11 @@ function AlphaKomSystemSection() {
     { icon: Brain, title: 'AI', text: 'Un team di agenti costruito sulla tua identità. Operativo ogni giorno.', accent: 'navy' as const },
   ]
 
-  const openAlice = () => window.dispatchEvent(new CustomEvent('alice:open'))
+  // Apre Alice con la frase d'apertura dedicata alla sezione AlphaKom.
+  const openAlice = () =>
+    window.dispatchEvent(
+      new CustomEvent('alice:open', { detail: { firstMessage: ALICE_CONFIG.alphakomFirstMessage } })
+    )
 
   return (
     <section id="alphakom" className="scroll-mt-28 py-28 lg:py-36 bg-cream overflow-hidden">

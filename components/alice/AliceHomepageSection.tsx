@@ -23,7 +23,11 @@ export function AliceHomepageSection() {
 
   // Trigger globale: qualsiasi componente può aprire Alice con CustomEvent('alice:open')
   useEffect(() => {
-    const handler = () => { playSound('open'); openAlice() }
+    const handler = (e: Event) => {
+      const firstMessage = (e as CustomEvent<{ firstMessage?: string }>).detail?.firstMessage
+      playSound('open')
+      openAlice(firstMessage ? { firstMessage } : undefined)
+    }
     window.addEventListener('alice:open', handler)
     return () => window.removeEventListener('alice:open', handler)
   }, [openAlice])

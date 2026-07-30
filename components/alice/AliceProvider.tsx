@@ -11,7 +11,7 @@ function genId() { return `msg-${Date.now()}-${++providerMsgId}` }
 interface AliceContextType {
   isOverlayOpen: boolean
   hasInteracted: boolean
-  openAlice: () => void
+  openAlice: (opts?: { firstMessage?: string }) => void
   closeAlice: () => void
   markInteracted: () => void
   status: string
@@ -50,6 +50,7 @@ export function AliceProvider({ children }: { children: ReactNode }) {
   const [currentUserText, setCurrentUserText] = useState('')
   const [micMuted, setMicMuted] = useState(false)
   const sessionStartedRef = useRef(false)
+  const firstMessageOverrideRef = useRef<string | undefined>(undefined)
   const mediaStreamRef = useRef<MediaStream | null>(null)
   const lastCommittedRef = useRef<{ role: string; text: string; time: number }>({ role: '', text: '', time: 0 })
 
@@ -98,7 +99,9 @@ export function AliceProvider({ children }: { children: ReactNode }) {
     onError: (error: any) => { console.error('Alice error:', error) },
   })
 
-  const openAlice = useCallback(() => {
+  const openAlice = useCallback((opts?: { firstMessage?: string }) => {
+    // Frase d'apertura opzionale, valida solo per questa apertura (es. sezione AlphaKom).
+    firstMessageOverrideRef.current = opts?.firstMessage
     setIsOverlayOpen(true)
     if (!hasInteracted) {
       setHasInteracted(true)
@@ -117,9 +120,12 @@ export function AliceProvider({ children }: { children: ReactNode }) {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
     mediaStreamRef.current = stream
     setMicMuted(false)
+    const firstMessage = firstMessageOverrideRef.current
     await conversation.startSession({
       agentId: ALICE_CONFIG.agentId,
       connectionType: 'webrtc',
+      // NB: l'override ha effetto solo se abilitato nell'agente ElevenLabs (Security → First message).
+      ...(firstMessage ? { overrides: { agent: { firstMessage } } } : {}),
     })
   }, [conversation])
 
