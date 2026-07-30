@@ -1032,6 +1032,244 @@ function AlphakomSection() {
 }
 
 // ============================================
+// ALPHAKOM — SISTEMA / EPICENTRO (Spec v1)
+// Sezione home #alphakom — Achievement Architect
+// ============================================
+function AlphaKomSystemSection() {
+  // AREA 3 — I 4 pilastri del sistema
+  const pillars = [
+    { icon: Target, title: 'Alpha', text: 'Identità e leadership orientata ai risultati.', accent: 'teal' as const },
+    { icon: Compass, title: 'In-Flow', text: 'Il sistema che trasforma obiettivi in azioni coerenti.', accent: 'navy' as const },
+    { icon: Shield, title: 'Protocol', text: 'Analisi del comportamento applicata. Metodo. Non intuizione.', accent: 'teal' as const },
+    { icon: Brain, title: 'AI', text: 'Un team di agenti costruito sulla tua identità. Operativo ogni giorno.', accent: 'navy' as const },
+  ]
+
+  const openAlice = () => window.dispatchEvent(new CustomEvent('alice:open'))
+
+  return (
+    <section id="alphakom" className="scroll-mt-28 py-28 lg:py-36 bg-cream overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+
+        {/* AREA 1 — Anchor label + titolo + sottotitolo */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={stagger}
+          className="max-w-3xl mb-16 md:mb-24"
+        >
+          <motion.div variants={fadeUp} className="flex items-center gap-4 mb-6">
+            <span className="w-10 h-[2px] bg-gradient-to-r from-teal to-teal/0" />
+            <span className="text-teal text-[13px] uppercase tracking-[0.15em] font-semibold">Achievement Architect</span>
+          </motion.div>
+          {/* Reso come h2: la home ha già un h1 nell'hero — outline corretto */}
+          <motion.h2 variants={fadeUp} className="font-display text-[44px] md:text-6xl lg:text-7xl text-navy-dark tracking-tight leading-[1.02] mb-5">
+            AlphaKom
+          </motion.h2>
+          <motion.p variants={fadeUp} className="font-serif text-[20px] md:text-[26px] text-navy/70 italic leading-snug">
+            Il sistema operativo per chi costruisce risultati reali.
+          </motion.p>
+        </motion.div>
+
+        {/* AREA 2 — Blocco introduttivo (testo 60% + foto 40%) */}
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-24 md:mb-32">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={stagger}
+            className="lg:col-span-7 order-2 lg:order-1"
+          >
+            <motion.p variants={fadeUp} className="font-display text-[24px] md:text-[30px] text-navy-dark font-bold leading-tight mb-8">
+              Non faccio formazione. Progetto sistemi.
+            </motion.p>
+            <motion.p variants={fadeUp} className="text-navy/75 text-[17px] md:text-[18px] leading-[1.8] text-justify mb-6">
+              AlphaKom è l&apos;architettura professionale che costruisce risultati replicabili per imprenditori,
+              manager e aziende. Non motivazione. Non contenuti. Struttura operativa che funziona il lunedì mattina.
+            </motion.p>
+            <motion.p variants={fadeUp} className="text-navy/75 text-[17px] md:text-[18px] leading-[1.8] mb-8">
+              Il mio ruolo ha un nome preciso: Achievement Architect. Progetto il sistema. Lo attivo.
+              Lo rendo indipendente da me.
+            </motion.p>
+            <motion.span
+              variants={fadeUp}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/8 border border-teal/15 text-teal text-[13px] font-semibold tracking-wide"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-teal/60" />
+              Achievement Architect — Founder AlphaKom
+            </motion.span>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
+            className="lg:col-span-5 order-1 lg:order-2"
+          >
+            <div className="relative">
+              <div className="absolute -top-4 -right-4 w-full h-full rounded-3xl bg-gradient-to-br from-teal/8 to-teal/3 -z-10" />
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl shadow-navy/10 relative">
+                <Image
+                  src="/images/luca-portrait.jpg"
+                  alt="Luca Pellicari — Achievement Architect, founder AlphaKom"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  quality={65}
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-navy-dark/30 to-transparent" />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* AREA 3 — I 4 pilastri del sistema */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={stagger}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-24 md:mb-32"
+        >
+          {pillars.map((p) => (
+            <motion.div
+              key={p.title}
+              variants={fadeUp}
+              className="group relative bg-white border border-navy/6 rounded-2xl p-6 md:p-7 shadow-sm hover:border-teal/20 hover:shadow-lg hover:shadow-teal/5 transition-all duration-300"
+            >
+              <div
+                className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-105 ${
+                  p.accent === 'teal'
+                    ? 'bg-teal/10 group-hover:bg-teal'
+                    : 'bg-navy/8 group-hover:bg-navy'
+                }`}
+              >
+                <p.icon
+                  className={`w-5 h-5 transition-colors duration-300 ${
+                    p.accent === 'teal' ? 'text-teal group-hover:text-white' : 'text-navy group-hover:text-white'
+                  }`}
+                />
+              </div>
+              <h3 className="font-display text-xl text-navy-dark font-semibold mb-1.5">{p.title}</h3>
+              <p className="text-navy/65 text-[14px] leading-snug">{p.text}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* AREA 4 — Frase centrale highlight */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto text-center mb-24 md:mb-32"
+        >
+          <p className="text-[26px] md:text-[34px] font-bold text-navy-dark leading-[1.3] tracking-tight mb-5">
+            Il vantaggio competitivo del prossimo decennio non sarà chi usa l&apos;AI.{' '}
+            <span className="text-teal italic font-bold">Sarà chi l&apos;ha costruita su sé stesso.</span>
+          </p>
+          <p className="text-[15px] text-gold italic font-medium">
+            — Luca Pellicari Pasetto, Achievement Architect
+          </p>
+        </motion.div>
+
+        {/* AREA 5 — I due percorsi (B2C / B2B) */}
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-24 md:mb-32">
+          {/* Card SX — professionisti / imprenditori */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col bg-white border border-navy/8 rounded-2xl p-8 md:p-10 shadow-sm hover:shadow-lg hover:shadow-teal/5 hover:border-teal/20 transition-all duration-300"
+          >
+            <span className="text-teal text-[12px] uppercase tracking-[0.18em] font-semibold mb-4">
+              Per professionisti e imprenditori
+            </span>
+            <h3 className="font-display text-[26px] md:text-[30px] text-navy-dark font-bold leading-tight mb-4">
+              Costruisci il tuo sistema.
+            </h3>
+            <p className="text-navy/70 text-[16px] leading-[1.75] mb-8 flex-grow">
+              Un percorso individuale costruito sulla tua identità professionale. Accesso diretto al metodo
+              AlphaKom e al sistema ALPHA IN-FLOW PROTOCOL AI.
+            </p>
+            <button
+              type="button"
+              onClick={openAlice}
+              className="group inline-flex items-center gap-2.5 self-start bg-teal text-white px-6 py-3 rounded-full font-semibold shadow-lg shadow-teal/20 hover:bg-teal-dark hover:shadow-xl hover:shadow-teal/30 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <span>Parla con Alice</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </motion.div>
+
+          {/* Card DX — aziende / team */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5, delay: 0.08 }}
+            className="flex flex-col bg-navy-dark border border-navy/40 rounded-2xl p-8 md:p-10 shadow-sm hover:shadow-xl transition-all duration-300"
+          >
+            <span className="text-teal-light text-[12px] uppercase tracking-[0.18em] font-semibold mb-4">
+              Per aziende e team
+            </span>
+            <h3 className="font-display text-[26px] md:text-[30px] text-white font-bold leading-tight mb-4">
+              Porta il sistema nella tua organizzazione.
+            </h3>
+            <p className="text-cream/75 text-[16px] leading-[1.75] mb-8 flex-grow">
+              Programmi corporate su misura. Leadership, decisioni, comunicazione interna, vantaggio
+              competitivo misurabile.
+            </p>
+            <Link
+              href="/contatti"
+              className="group inline-flex items-center gap-2.5 self-start bg-white text-navy px-6 py-3 rounded-full font-semibold hover:bg-teal hover:text-white transition-all duration-300"
+            >
+              <span>Prenota una call con Luca</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* AREA 6 — Widget Alice (CTA finale) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
+          className="max-w-2xl mx-auto text-center"
+        >
+          <p className="text-teal text-[12px] uppercase tracking-[0.22em] font-semibold mb-4">
+            Alpha AI-Team — Voce del sistema
+          </p>
+          <h3 className="font-display text-[28px] md:text-[36px] text-navy-dark font-bold mb-5">
+            Parla con Alice.
+          </h3>
+          <p className="text-navy/70 text-[17px] leading-relaxed mb-8">
+            Alice conosce ogni dettaglio del sistema AlphaKom. Se vuoi capire come funziona — o come
+            costruire il tuo sistema — inizia da qui.
+          </p>
+          <button
+            type="button"
+            onClick={openAlice}
+            className="group inline-flex items-center gap-3 bg-navy text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-navy/15 hover:bg-navy-dark hover:-translate-y-0.5 transition-all duration-300"
+          >
+            <span>Parla con Alice</span>
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+          </button>
+          <p className="mt-6 text-[14px] text-navy/50 italic">
+            Non un chatbot. La voce di un sistema costruito su 30 anni di metodo.
+          </p>
+        </motion.div>
+
+      </div>
+    </section>
+  )
+}
+
+// ============================================
 // QUOTE SECTION - Full Width Statement
 // ============================================
 function QuoteSection() {
@@ -1655,6 +1893,7 @@ export default function HomePage() {
       <HeroSection />
       <AliceHomepageSection />
       <AlphaTeamSection />
+      <AlphaKomSystemSection />
       <OpeningSection />
       <IdentityHighlightsSection />
       <ChiSonoSection />

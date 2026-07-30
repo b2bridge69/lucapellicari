@@ -12,6 +12,7 @@ import { SITE_CONFIG } from '@/lib/constants'
 const NAV_GROUPS = {
   primary: [
     { href: '/', label: 'Home' },
+    { href: '/#alphakom', label: 'AlphaKom' },
     { href: '/chi-sono', label: 'Chi Sono' },
     { href: '/il-team', label: 'Il Team' },
   ],
