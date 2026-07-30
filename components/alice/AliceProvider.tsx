@@ -121,11 +121,13 @@ export function AliceProvider({ children }: { children: ReactNode }) {
     mediaStreamRef.current = stream
     setMicMuted(false)
     const firstMessage = firstMessageOverrideRef.current
+    // L'override viene inviato solo se esplicitamente abilitato in config E l'agente ElevenLabs
+    // lo consente. Altrimenti ElevenLabs rifiuta la sessione (conversazione terminata all'istante).
+    const useOverride = ALICE_CONFIG.firstMessageOverrideEnabled && !!firstMessage
     await conversation.startSession({
       agentId: ALICE_CONFIG.agentId,
       connectionType: 'webrtc',
-      // NB: l'override ha effetto solo se abilitato nell'agente ElevenLabs (Security → First message).
-      ...(firstMessage ? { overrides: { agent: { firstMessage } } } : {}),
+      ...(useOverride ? { overrides: { agent: { firstMessage } } } : {}),
     })
   }, [conversation])
 

@@ -4,8 +4,12 @@ export const ALICE_CONFIG = {
   role: 'Assistente AI',
   greeting: 'Ciao, sono Alice. Vuoi parlare?',
   // Frase d'apertura usata SOLO quando Alice viene lanciata dalla sezione AlphaKom (#alphakom).
-  // Richiede che l'override del "First message" sia abilitato nell'agente su ElevenLabs.
   alphakomFirstMessage: 'Come funziona ALPHA IN-FLOW PROTOCOL AI?',
+  // ATTENZIONE: mettere a `true` SOLO dopo aver abilitato l'override del "First message"
+  // nell'agente ElevenLabs (Security). Se è `true` senza quell'impostazione, ElevenLabs
+  // rifiuta la sessione e la conversazione termina all'istante. Con `false` l'override non
+  // viene inviato e Alice funziona normalmente (frase d'apertura di default).
+  firstMessageOverrideEnabled: false,
   colors: {
     teal: '#6B9BAE',
     tealLight: '#8FB8C7',
