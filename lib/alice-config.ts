@@ -9,7 +9,7 @@ export const ALICE_CONFIG = {
   // nell'agente ElevenLabs (Security). Se è `true` senza quell'impostazione, ElevenLabs
   // rifiuta la sessione e la conversazione termina all'istante. Con `false` l'override non
   // viene inviato e Alice funziona normalmente (frase d'apertura di default).
-  firstMessageOverrideEnabled: false,
+  firstMessageOverrideEnabled: true,
   colors: {
     teal: '#6B9BAE',
     tealLight: '#8FB8C7',
