@@ -87,14 +87,14 @@ const team: TeamMember[] = [
     name: 'Marcel',
     role: 'AI Tools & Prompt Strategist',
     competence: 'L\u2019infrastruttura AI che fa funzionare il team. Strategia di prompt e tooling.',
-    img: '/images/team/marcel-prompt-strategist.png',
+    img: '/images/team/marcel-prompt-strategist.jpg',
     category: 'structural',
   },
   {
     name: 'Giulia',
     role: 'Quality Editor',
     competence: 'Ogni contenuto pubblicato passa da lei. Coerenza, tono, precisione.',
-    img: '/images/team/giulia-quality-editor.png',
+    img: '/images/team/giulia-quality-editor.jpg',
     category: 'structural',
   },
 ]
